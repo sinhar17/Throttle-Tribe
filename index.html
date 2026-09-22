@@ -182,9 +182,9 @@
               <h3 style="margin:10px 0 12px;font-family:Anton,sans-serif;font-size:clamp(20px, 17.9px + 0.56vw, 26px);line-height:1.1;color:#F3ECE0">{{ ride.name }}</h3>
               <p style="margin:0;font-size:16px;line-height:1.65;color:#9E958A">{{ ride.summary }}</p>
               <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;padding-top:18px;border-top:1px solid #2A241D;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.1em;color:#8E8375">
-                <span>{{ ride.distance }}</span>
-                <span>{{ ride.duration }}</span>
-                <span>{{ ride.difficulty }}</span>
+                <sc-if value="{{ ride.hasDistance }}"><span>{{ ride.distance }}</span></sc-if>
+                <sc-if value="{{ ride.hasDuration }}"><span>{{ ride.duration }}</span></sc-if>
+                <sc-if value="{{ ride.hasDifficulty }}"><span>{{ ride.difficulty }}</span></sc-if>
               </div>
             </div>
           </div>
@@ -321,9 +321,9 @@
               <h3 style="margin:10px 0 10px;font-family:Anton,sans-serif;font-size:clamp(21px, 17.8px + 0.85vw, 30px);line-height:1.05;color:#F3ECE0">{{ ride.name }}</h3>
               <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A;max-width:70ch">{{ ride.summary }}</p>
               <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.1em;color:#8E8375">
-                <span>MEET {{ ride.meetTime }} &middot; {{ ride.meetPoint }}</span>
-                <span>{{ ride.distance }}</span>
-                <span>{{ ride.duration }}</span>
+                <sc-if value="{{ ride.hasMeet }}"><span>MEET {{ ride.meetTime }} &middot; {{ ride.meetPoint }}</span></sc-if>
+                <sc-if value="{{ ride.hasDistance }}"><span>{{ ride.distance }}</span></sc-if>
+                <sc-if value="{{ ride.hasDuration }}"><span>{{ ride.duration }}</span></sc-if>
                 <span>LEADER: {{ ride.leader }}</span>
               </div>
             </div>
@@ -860,6 +860,8 @@
 const RIDES = [
   { id:'fr', name:'Let’s Go France 🇫🇷', tag:'INTERNATIONAL', date:'23–26 APRIL 2027', meetTime:'05:00', meetPoint:'Folkestone, Eurotunnel terminal', summary:'Cross the Channel with the Tribe for a long weekend of French roads and food.', distance:'600 MILES', duration:'4 DAYS', difficulty:'MODERATE', leader:'TBC', image:'assets/ride-france-alps.jpg', imageNote:'photo: French country road, 16:10', motorway:'Yes', international:'Yes',
     description:'Passport, green card insurance and breakdown cover required. We book the crossing as a group to keep the cost down.', stop:'Overnight, Normandy', riders:'6–14' },
+  { id:'furka', name:'Europe Ride: Furka Pass 🇨🇭', tag:'INTERNATIONAL', date:'SEPTEMBER 2026', meetTime:'TBC', meetPoint:'TBC', summary:'A European ride to the Furka Pass, one of the great roads of the Swiss Alps.', distance:'TBC', duration:'TBC', difficulty:'TBC', leader:'TBC', imageNote:'photo: Furka Pass, 16:10', motorway:'TBC', international:'Yes',
+    description:'A European ride taking in the Furka Pass in the Swiss Alps. Dates, route and costs will be shared in the Tribe group chat.', stop:'TBC', riders:'TBC' },
 ];
 
 const MEMBERS = [
@@ -901,7 +903,7 @@ class Component extends DCLogic {
     const { page, selected, rsvp, filter } = this.state;
     const sel = RIDES.find(r => r.id === selected) || null;
     const going = sel ? !!rsvp[sel.id] : false;
-    const decorate = r => ({ ...r, hasImage: !!r.image, noImage: !r.image, imageCss: r.image ? `url('${r.image}')` : 'none', open: () => this.openRide(r.id) });
+    const decorate = r => ({ ...r, hasMeet: r.meetPoint !== 'TBC', hasDistance: r.distance !== 'TBC', hasDuration: r.duration !== 'TBC', hasDifficulty: r.difficulty !== 'TBC', hasImage: !!r.image, noImage: !r.image, imageCss: r.image ? `url('${r.image}')` : 'none', open: () => this.openRide(r.id) });
     const styles = ['ALL', 'CRUISER', 'ADVENTURE', 'SPORTS', 'TOURING', 'CLASSIC', 'NAKED', 'OTHER'];
 
     return {
