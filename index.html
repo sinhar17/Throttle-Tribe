@@ -136,7 +136,7 @@
         </div>
         <span onClick="{{ goRides }}" style="cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.16em;color:#C9852A;border-bottom:1px solid #6B5A42;padding-bottom:6px">SEE ALL RIDES</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:760px">
         <sc-for list="{{ featuredRides }}" as="ride" hint-placeholder-count="3">
           <div onClick="{{ ride.open }}" style="cursor:pointer;border:1px solid #2A241D;background:#110F0D;display:flex;flex-direction:column">
             <div style="aspect-ratio:16/10;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);border-bottom:1px solid #2A241D;display:flex;align-items:flex-end;padding:14px;overflow:hidden;position:relative">
@@ -829,22 +829,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
 const RIDES = [
-  { id:'sat', name:'Saturday Ride Out', tag:'DAY RIDE', date:'DATE TBA', meetTime:'08:30', meetPoint:'Cobham Services, M25', summary:'A relaxed half-day loop through the lanes with a café stop halfway. Good first ride if you are new to the Tribe.', distance:'120 MILES', duration:'5 HOURS', difficulty:'EASY', leader:'TBC', imageNote:'photo: lanes ride out, 16:10', motorway:'Some', international:'No',
-    description:'Our regular Saturday loop. We leave together, keep a steady pace, and nobody gets dropped. Marshals hold every junction until the last rider is through.', stop:'Riverside Café', riders:'12–20' },
-  { id:'brk', name:'Sunday Breakfast Ride', tag:'MORNING', date:'DATE TBA', meetTime:'07:45', meetPoint:'Rivington Barn car park', summary:'Early start, empty roads, big breakfast. Back home before lunch.', distance:'70 MILES', duration:'3 HOURS', difficulty:'EASY', leader:'TBC', imageNote:'photo: bikes outside a café, 16:10', motorway:'No', international:'No',
-    description:'The easiest way to meet the Tribe. Short route, no motorway, and a proper breakfast at the end of it.', stop:'Barn Café', riders:'10–25' },
-  { id:'coast', name:'UK Coastal Ride', tag:'DAY RIDE', date:'DATE TBA', meetTime:'08:00', meetPoint:'TBC', summary:'A full day following the coast road, with a seafront lunch stop and a scenic return leg.', distance:'210 MILES', duration:'8 HOURS', difficulty:'MODERATE', leader:'TBC', imageNote:'photo: coastal road, 16:10', motorway:'Yes', international:'No',
-    description:'A longer day out. Bring waterproofs and fuel up before the meet — the first leg runs 90 miles without a planned stop.', stop:'Seafront lunch', riders:'8–16' },
-  { id:'peak', name:'Peak District Ride', tag:'DAY RIDE', date:'DATE TBA', meetTime:'08:30', meetPoint:'TBC', summary:'Snake Pass, Winnats and the best of the Peaks, at a pace everybody is comfortable with.', distance:'180 MILES', duration:'7 HOURS', difficulty:'MODERATE', leader:'TBC', imageNote:'photo: Peak District pass, 16:10', motorway:'Some', international:'No',
-    description:'Technical in places and busy with traffic in season. Ride your own ride — the group regroups at every summit.', stop:'Castleton', riders:'8–18' },
-  { id:'wales', name:'Wales Weekend Ride', tag:'WEEKEND', date:'DATE TBA', meetTime:'07:00', meetPoint:'TBC', summary:'Two days, one night, and the Evo Triangle. Accommodation booked as a group.', distance:'420 MILES', duration:'2 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: Welsh mountain road, 16:10', motorway:'Yes', international:'No',
-    description:'An overnight tour. Luggage capacity needed, and a bike comfortable at motorway speeds for the run out and back.', stop:'Overnight, Snowdonia', riders:'6–12' },
-  { id:'scot', name:'Scotland Motorcycle Tour', tag:'TOUR', date:'DATE TBA', meetTime:'06:30', meetPoint:'TBC', summary:'The big one. NC500 territory, several days on the road, planned months in advance.', distance:'1,200 MILES', duration:'6 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: Highlands, 16:10', motorway:'Yes', international:'No',
-    description:'Our flagship tour. Places are limited and confirmed on a deposit. Full route pack issued to riders beforehand.', stop:'Multiple overnights', riders:'6–10' },
   { id:'fr', name:'Let’s Go France 🇫🇷', tag:'INTERNATIONAL', date:'23–26 APRIL 2027', meetTime:'05:00', meetPoint:'Folkestone, Eurotunnel terminal', summary:'Cross the Channel with the Tribe for a long weekend of French roads and food.', distance:'600 MILES', duration:'4 DAYS', difficulty:'MODERATE', leader:'TBC', image:'assets/ride-france-alps.jpg', imageNote:'photo: French country road, 16:10', motorway:'Yes', international:'Yes',
     description:'Passport, green card insurance and breakdown cover required. We book the crossing as a group to keep the cost down.', stop:'Overnight, Normandy', riders:'6–14' },
-  { id:'eu', name:'European Touring Weekend', tag:'INTERNATIONAL', date:'DATE TBA', meetTime:'05:00', meetPoint:'TBC', summary:'Alpine passes and long days in the saddle, for riders with touring experience.', distance:'900 MILES', duration:'5 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: alpine pass, 16:10', motorway:'Yes', international:'Yes',
-    description:'A serious tour for experienced riders. High mileage days, mountain passes, and variable weather at altitude.', stop:'Multiple overnights', riders:'6–10' },
 ];
 
 const MEMBERS = [
