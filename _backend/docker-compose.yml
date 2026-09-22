@@ -1,0 +1,153 @@
+# Throttle Tribe UK — members-area backend
+#
+# Runs on the Proxmox box. Sized for a 4GB LXC/VM.
+# Nothing here listens on the public internet: cloudflared makes an outbound
+# connection to Cloudflare, so no router ports are opened and the home IP
+# never appears in DNS.
+#
+#   postgres    members, rides, invitations. Row level security does the access control.
+#   gotrue      authentication (Google sign-in + magic links). Never hand-rolled.
+#   postgrest   REST API over postgres, enforcing RLS per request.
+#   cloudflared outbound tunnel -> api.throttletribe.uk
+#
+# Copy .env.example to .env and fill it in before starting.
+
+name: throttle-tribe
+
+services:
+  db:
+    image: supabase/postgres:15.8.1.060
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: throttletribe
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      JWT_EXP: 3600
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      # Mounted, not auto-run. The supabase/postgres image has its own init
+      # scripts that must create the auth schema and roles first, and relying
+      # on filename ordering against them is fragile. Apply these by hand
+      # after first boot - see README step 5.
+      - ./01-schema.sql:/migrations/01-schema.sql:ro
+      - ./02-invitations.sql:/migrations/02-invitations.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d throttletribe"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+    # Not published to the host: only other containers reach it.
+    expose:
+      - "5432"
+
+  auth:
+    image: supabase/gotrue:v2.177.0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: ${API_EXTERNAL_URL:?}
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@db:5432/throttletribe
+      GOTRUE_SITE_URL: ${SITE_URL:?}
+      GOTRUE_URI_ALLOW_LIST: ${SITE_URL}/**
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+
+      # Invite-only: nobody may create an account unless an invitation
+      # grants them a members row. Signup here is what produces the auth
+      # user; membership is still gated by the invite token.
+      GOTRUE_DISABLE_SIGNUP: "false"
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
+      GOTRUE_MAILER_AUTOCONFIRM: "false"
+
+      # Google sign-in
+      GOTRUE_EXTERNAL_GOOGLE_ENABLED: "true"
+      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOOGLE_SECRET}
+      GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
+
+      # Magic links
+      GOTRUE_SMTP_HOST: ${SMTP_HOST}
+      GOTRUE_SMTP_PORT: ${SMTP_PORT}
+      GOTRUE_SMTP_USER: ${SMTP_USER}
+      GOTRUE_SMTP_PASS: ${SMTP_PASS}
+      GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_USER}
+      GOTRUE_SMTP_SENDER_NAME: "Throttle Tribe UK"
+      GOTRUE_MAILER_URLPATHS_CONFIRMATION: /auth/v1/verify
+      GOTRUE_MAILER_URLPATHS_RECOVERY: /auth/v1/verify
+      GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE: /auth/v1/verify
+
+      # Brute-force protection
+      GOTRUE_RATE_LIMIT_EMAIL_SENT: 10
+      GOTRUE_SECURITY_REFRESH_TOKEN_ROTATION_ENABLED: "true"
+      GOTRUE_SECURITY_REFRESH_TOKEN_REUSE_INTERVAL: 10
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    expose:
+      - "9999"
+
+  rest:
+    image: postgrest/postgrest:v12.2.3
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Connects as `authenticator`, which can only switch to the role named
+      # in the request's JWT. Every query therefore runs under RLS.
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@db:5432/throttletribe
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_JWT_AUD: authenticated
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_DB_MAX_ROWS: 500
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    expose:
+      - "3000"
+
+  gateway:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    depends_on:
+      - auth
+      - rest
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+    expose:
+      - "8080"
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    depends_on:
+      - gateway
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN:?}
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+volumes:
+  db-data:
+  caddy-data:

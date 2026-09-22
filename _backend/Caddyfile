@@ -1,0 +1,39 @@
+# Routes the tunnel's traffic to auth or the API.
+# TLS is terminated by Cloudflare, so this speaks plain HTTP internally.
+
+:8080 {
+	# CORS: only the real site may call this API from a browser.
+	@cors_preflight method OPTIONS
+	handle @cors_preflight {
+		header Access-Control-Allow-Origin "https://throttletribe.uk"
+		header Access-Control-Allow-Methods "GET, POST, PATCH, DELETE, OPTIONS"
+		header Access-Control-Allow-Headers "authorization, apikey, content-type, prefer"
+		header Access-Control-Max-Age "86400"
+		respond 204
+	}
+
+	header {
+		Access-Control-Allow-Origin "https://throttletribe.uk"
+		Access-Control-Expose-Headers "content-range"
+		# The members area must never be indexed.
+		X-Robots-Tag "noindex, nofollow"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	handle /auth/v1/* {
+		uri strip_prefix /auth/v1
+		reverse_proxy auth:9999
+	}
+
+	handle /rest/v1/* {
+		uri strip_prefix /rest/v1
+		reverse_proxy rest:3000
+	}
+
+	handle {
+		respond "Throttle Tribe API" 404
+	}
+}

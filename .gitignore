@@ -1,1 +1,7 @@
 .thumbnail
+
+# Backend secrets - never commit these.
+_backend/.env
+_backend/*.env
+!_backend/.env.example
+_backend/*.sql.gz

@@ -169,6 +169,34 @@ create policy invites_admin on invitations     for all using (is_admin()) with c
 create policy audit_admin   on admin_audit_log for select using (is_admin());
 
 -- ---------------------------------------------------------------------------
+-- Table privileges.
+--
+-- RLS decides WHICH ROWS a role may touch, but the role must also hold the
+-- table privilege at all. Both are required: a missing GRANT means no access
+-- regardless of policy, and a GRANT without a matching policy still returns
+-- nothing. Anonymous visitors are granted select on `rides` only, and even
+-- there the rides_public policy limits them to rides marked public.
+-- ---------------------------------------------------------------------------
+grant usage on schema public to anon, authenticated;
+
+grant select                         on rides   to anon;
+grant select, insert, update, delete on rides   to authenticated;
+grant select, update                 on members to authenticated;
+grant select, insert, update, delete on rsvps   to authenticated;
+grant select, insert, update, delete on member_emergency_contacts to authenticated;
+grant select, insert, update, delete on invitations to authenticated;
+grant select                         on admin_audit_log to authenticated;
+grant insert                         on admin_audit_log to authenticated;
+grant usage, select on all sequences in schema public to authenticated;
+
+-- Anonymous visitors get nothing else, explicitly.
+revoke all on members                   from anon;
+revoke all on member_emergency_contacts from anon;
+revoke all on rsvps                     from anon;
+revoke all on invitations               from anon;
+revoke all on admin_audit_log           from anon;
+
+-- ---------------------------------------------------------------------------
 -- Designated administrator
 --
 -- Promotes throttletribe.uk@gmail.com to admin the first time that account
