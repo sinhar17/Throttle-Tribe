@@ -64,7 +64,8 @@
       <span onClick="{{ goStory }}" style="cursor:pointer;color:#CFC6B8">OUR STORY<sc-if value="{{ isStory }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
       <span onClick="{{ goRides }}" style="cursor:pointer;color:#CFC6B8">RIDES &amp; EVENTS<sc-if value="{{ isRides }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
       <span onClick="{{ goMembers }}" style="cursor:pointer;color:#CFC6B8">MEMBERS<sc-if value="{{ isMembers }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
-      <span onClick="{{ goLogin }}" style="cursor:pointer;color:#0D0C0B;background:#C9852A;padding:10px 18px;font-weight:700">MEMBER LOGIN</span>
+      <span onClick="{{ goLogin }}" style="cursor:pointer;color:#CFC6B8">MEMBER LOGIN</span>
+      <span onClick="{{ goJoin }}" style="cursor:pointer;color:#0D0C0B;background:#C9852A;padding:10px 18px;font-weight:700">JOIN THE TRIBE</span>
       <span style="display:flex;gap:14px;align-items:center;padding-left:12px;border-left:1px solid #2A241D">
         <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" title="Instagram" style="color:#C9852A;display:flex;align-items:center" style-hover="color:#E8B45F">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -92,7 +93,7 @@
       <p style="margin:24px 0 0;font-size:24px;font-weight:500;color:#F3ECE0;max-width:34ch">&ldquo;Different bikes. Different roads. One Tribe.&rdquo;</p>
       <p style="margin:16px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:52ch">&ldquo;Bringing together Indian motorcycle riders across the UK for unforgettable rides, friendships and adventures.&rdquo;</p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:40px">
-        <span onClick="{{ goLogin }}" style="cursor:pointer;padding:17px 30px;background:#C9852A;color:#0D0C0B;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.14em">MEMBER LOGIN</span>
+        <span onClick="{{ goJoin }}" style="cursor:pointer;padding:17px 30px;background:#C9852A;color:#0D0C0B;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.14em">JOIN THE TRIBE</span>
         <span onClick="{{ goRides }}" style="cursor:pointer;padding:17px 30px;border:1px solid #6B5A42;color:#F3ECE0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.14em">ABOUT OUR RIDES</span>
         <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" style="padding:17px 30px;border:1px solid #2A241D;color:#CFC6B8;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.14em">FOLLOW US ON INSTAGRAM</a>
       </div>
@@ -141,8 +142,8 @@
           </div>
         </div>
         <div style="border:1px solid #2A241D;background:#110F0D;padding:clamp(26px, 18px + 2.2vw, 40px)">
-          <p style="margin:0;font-family:Anton,sans-serif;font-size:clamp(22px, 17.8px + 1.13vw, 34px);line-height:1.25;color:#E8D6AE">THE TRIBE IS INVITE ONLY</p>
-          <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">Membership is by invitation from the Throttle Tribe administrator. There is no public sign-up &mdash; riders join when an existing member puts their name forward.</p>
+          <p style="margin:0;font-family:Anton,sans-serif;font-size:clamp(22px, 17.8px + 1.13vw, 34px);line-height:1.25;color:#E8D6AE">JOIN THE TRIBE</p>
+          <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">Ride a motorcycle in the UK and want to become part of a growing community of Indian riders? Introduce yourself and we will be in touch.</p>
           <p style="margin:18px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.18em;color:#C9852A">NO MAN LEFT BEHIND</p>
         </div>
       </div>
@@ -337,11 +338,96 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isJoin }}">
+  <div>
+    <section style="padding:clamp(52px, 34px + 4.8vw, 90px) 5vw clamp(34px, 24px + 2.2vw, 50px);border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">MEMBERSHIP</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:clamp(32px, 17.9px + 3.76vw, 72px);line-height:0.98;color:#F3ECE0">JOIN THE TRIBE</h1>
+      <p style="margin:20px 0 0;font-size:19px;line-height:1.7;color:#B6ADA1;max-width:60ch">&ldquo;Ride a motorcycle in the UK and want to become part of a growing community of Indian riders? Introduce yourself to the Tribe.&rdquo;</p>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:50px;padding:clamp(40px, 28px + 2.6vw, 60px) 5vw clamp(56px, 36px + 5.2vw, 100px);align-items:start">
+      <form onSubmit="{{ submitJoin }}" style="display:grid;gap:18px;border:1px solid #2A241D;background:#110F0D;padding:34px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px">
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">FULL NAME
+            <input name="name" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">EMAIL
+            <input name="email" type="email" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOBILE NUMBER
+            <input name="mobile" type="tel" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">TOWN / CITY
+            <input name="town" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOTORCYCLE MAKE
+            <input name="make" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOTORCYCLE MODEL
+            <input name="model" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">ENGINE CAPACITY (CC)
+            <input name="cc" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">YEARS RIDING
+            <input name="years" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">LICENCE TYPE
+            <select name="licence" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px">
+              <option>Full (A)</option>
+              <option>A2</option>
+              <option>A1</option>
+              <option>CBT</option>
+            </select>
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">INSTAGRAM HANDLE
+            <input name="instagram" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+        </div>
+        <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">EMERGENCY CONTACT (OPTIONAL)
+          <input name="emergency" type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+        </label>
+        <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">SHORT INTRODUCTION
+          <textarea name="intro" rows="4" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px;resize:vertical"></textarea>
+        </label>
+        <label style="display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.55;color:#CFC6B8">
+          <input name="agree" type="checkbox" required="required" style="margin-top:4px;width:18px;height:18px;accent-color:#C9852A" />
+          <span>I agree to follow Throttle Tribe&rsquo;s <span onClick="{{ goRules }}" style="cursor:pointer;color:#C9852A">riding and community guidelines</span> and have read the <span onClick="{{ goPrivacy }}" style="cursor:pointer;color:#C9852A">Privacy Policy</span>.</span>
+        </label>
+        <button type="submit" style="margin-top:6px;padding:18px;background:#C9852A;color:#0D0C0B;border:0;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.16em;cursor:pointer">REQUEST TO JOIN</button>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:#8E8375">This opens an email to the Tribe with your details filled in &mdash; send it and we will reply. Add a photo of you and your bike as an attachment if you would like one on your profile.</p>
+      </form>
+      <div style="display:grid;gap:22px">
+        <div style="border:1px solid #2A241D;background:#110F0D;padding:30px">
+          <h2 style="margin:0;font-family:Anton,sans-serif;font-size:clamp(22px, 17.8px + 1.13vw, 34px);line-height:1.05;color:#F3ECE0">GET IN TOUCH</h2>
+          <p style="margin:16px 0 0;font-size:17px;line-height:1.7;color:#B6ADA1">Not ready to join yet? Ask us anything &mdash; membership, rides, collaboration or sponsorship.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
+            <a href="mailto:throttletribe.uk@gmail.com?subject=Membership%20enquiry" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">MEMBERSHIP ENQUIRY</a>
+            <a href="mailto:throttletribe.uk@gmail.com?subject=Ride%20enquiry" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">RIDE ENQUIRY</a>
+            <a href="mailto:throttletribe.uk@gmail.com?subject=Collaboration" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">COLLABORATION</a>
+            <a href="mailto:throttletribe.uk@gmail.com?subject=Sponsorship" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">SPONSORSHIP</a>
+            <a href="mailto:throttletribe.uk@gmail.com?subject=General%20enquiry" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">GENERAL ENQUIRY</a>
+          </div>
+          <p style="margin:24px 0 0;font-size:18px"><a href="mailto:throttletribe.uk@gmail.com" style="color:#E8D6AE">throttletribe.uk@gmail.com</a></p>
+        </div>
+        <div style="border:1px solid #2A241D;background:#110F0D;padding:30px">
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:clamp(20px, 17.9px + 0.56vw, 26px);color:#F3ECE0">WHAT HAPPENS NEXT</h3>
+          <div style="display:grid;gap:16px;margin-top:20px">
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">1</span>We read your introduction and check you ride in the UK.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">2</span>We add you to the Tribe group and send the ride guidelines.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">3</span>You come out on a breakfast ride and meet everyone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ isLogin }}">
   <div>
     <section style="padding:clamp(52px, 34px + 4.8vw, 90px) 5vw clamp(34px, 24px + 2.2vw, 50px);border-bottom:1px solid #2A241D">
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">MEMBER LOGIN</span>
-      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:clamp(32px, 17.9px + 3.76vw, 72px);line-height:0.98;color:#F3ECE0">THE TRIBE IS INVITE ONLY</h1>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:clamp(32px, 17.9px + 3.76vw, 72px);line-height:0.98;color:#F3ECE0">MEMBER SIGN-IN</h1>
       <p style="margin:20px 0 0;font-size:19px;line-height:1.7;color:#B6ADA1;max-width:60ch">Already part of the Tribe? Sign in to see upcoming rides.</p>
     </section>
 
@@ -360,18 +446,18 @@
       <div style="display:grid;gap:22px">
         <div style="border:1px solid #2A241D;background:#110F0D;padding:clamp(26px, 18px + 2.2vw, 36px)">
           <h3 style="margin:0;font-family:Anton,sans-serif;font-size:clamp(20px, 17.9px + 0.56vw, 26px);color:#F3ECE0">HOW YOU JOIN THE TRIBE</h3>
-          <p style="margin:16px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">Throttle Tribe does not accept public applications. Membership is by invitation from the Throttle Tribe administrator only.</p>
+          <p style="margin:16px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">New riders are welcome to introduce themselves through the Join the Tribe form. Existing members sign in here.</p>
           <div style="display:grid;gap:14px;margin-top:20px">
-            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">1</span>An existing member puts your name forward.</p>
-            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">2</span>The Admin sends you a personal, single-use invitation link.</p>
-            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">3</span>You accept the invitation and set up your rider profile.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">1</span>Introduce yourself using the Join the Tribe form.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">2</span>We read your introduction and check you ride in the UK.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">3</span>We add you to the Tribe group and send the ride guidelines.</p>
             <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">4</span>You come out on a breakfast ride and meet everyone.</p>
           </div>
         </div>
 
         <div style="border:1px solid #2A241D;background:#110F0D;padding:clamp(26px, 18px + 2.2vw, 36px)">
           <h3 style="margin:0;font-family:Anton,sans-serif;font-size:clamp(20px, 17.9px + 0.56vw, 26px);color:#F3ECE0">RIDDEN WITH US BEFORE?</h3>
-          <p style="margin:16px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">If you have ridden with the Tribe and have not had an invitation yet, get in touch and we will look into it.</p>
+          <p style="margin:16px 0 0;font-size:17px;line-height:1.75;color:#B6ADA1">If you have ridden with the Tribe and cannot sign in yet, get in touch and we will look into it.</p>
           <p style="margin:18px 0 0;font-size:18px"><a href="mailto:throttletribe.uk@gmail.com?subject=Throttle%20Tribe%20membership" style="color:#E8D6AE">throttletribe.uk@gmail.com</a></p>
         </div>
       </div>
@@ -746,6 +832,7 @@
         <span onClick="{{ goStory }}" style="cursor:pointer;color:#CFC6B8">OUR STORY</span>
         <span onClick="{{ goRides }}" style="cursor:pointer;color:#CFC6B8">RIDES &amp; EVENTS</span>
         <span onClick="{{ goMembers }}" style="cursor:pointer;color:#CFC6B8">MEMBERS</span>
+        <span onClick="{{ goJoin }}" style="cursor:pointer;color:#CFC6B8">JOIN THE TRIBE</span>
         <span onClick="{{ goLogin }}" style="cursor:pointer;color:#CFC6B8">MEMBER LOGIN</span>
       </div>
       <div style="display:grid;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em">
@@ -829,9 +916,10 @@ class Component extends DCLogic {
 
     return {
       isHome: page === 'home', isStory: page === 'story', isRides: page === 'rides',
-      isMembers: page === 'members', isLogin: page === 'login',
+      isMembers: page === 'members', isJoin: page === 'join', isLogin: page === 'login',
       goHome: () => this.go('home'), goStory: () => this.go('story'),
       goRides: () => this.go('rides'), goMembers: () => this.go('members'),
+      goJoin: () => this.go('join'),
       goLogin: () => this.go('login'),
       isRules: page === 'rules',
       goRules: () => this.go('rules'),
@@ -844,6 +932,21 @@ class Component extends DCLogic {
       gallerySlots: ['IG post','IG post','IG reel','IG post','IG post','IG post'].map((label, i) => ({ label, key: i })),
       safetyRules: SAFETY,
 
+      submitJoin: (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const get = (n) => (form.elements[n] && form.elements[n].value || '').trim();
+        const lines = [
+          ['Name', get('name')], ['Email', get('email')], ['Mobile', get('mobile')],
+          ['Town / City', get('town')], ['Motorcycle', `${get('make')} ${get('model')}`.trim()],
+          ['Engine (cc)', get('cc')], ['Years riding', get('years')], ['Licence', get('licence')],
+          ['Instagram', get('instagram')], ['Emergency contact', get('emergency')],
+        ].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`);
+        const intro = get('intro');
+        if (intro) lines.push('', 'Introduction:', intro);
+        const body = `Hi Throttle Tribe,\n\nI would like to join the Tribe.\n\n${lines.join('\n')}\n\nThanks`;
+        window.location.href = `mailto:throttletribe.uk@gmail.com?subject=${encodeURIComponent('Membership request: ' + (get('name') || 'new rider'))}&body=${encodeURIComponent(body)}`;
+      },
       filters: styles.map(s => ({
         label: s, key: s,
         select: () => this.setState({ filter: s }),
