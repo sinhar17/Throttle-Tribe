@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Member-only areas. These paths serve no private data today, but are
+# reserved for the authenticated members area and must never be indexed.
+Disallow: /my-tribe/
+Disallow: /members/
+Disallow: /rides/upcoming/
+Disallow: /events/private/
+Disallow: /invite/
+Disallow: /admin/
+
+Sitemap: https://throttletribe.uk/sitemap.xml
