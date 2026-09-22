@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  body { margin:0; background:#0D0C0B; color:#E7E1D8; font-family:Barlow, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#C9852A; text-decoration:none; }
+  a:hover { color:#E8B45F; }
+  input, textarea, select { font-family:Barlow, sans-serif; }
+</style>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden;background:#0D0C0B">
+
+  <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:12px 5vw;background:rgba(13,12,11,0.94);backdrop-filter:blur(10px);border-bottom:1px solid #2A241D">
+    <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:14px;cursor:pointer;min-width:0">
+      <img src="assets/throttle-tribe-logo.png" alt="Throttle Tribe UK" style="height:100px;width:auto;display:block" />
+      <div style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-family:Anton, sans-serif;font-size:27px;letter-spacing:0.04em;color:#E8D6AE">THROTTLE TRIBE</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.26em;color:#A29684;margin-top:6px">NO MAN LEFT BEHIND</span>
+      </div>
+    </div>
+    <nav style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em">
+      <span onClick="{{ goHome }}" style="cursor:pointer;color:#CFC6B8">HOME<sc-if value="{{ isHome }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
+      <span onClick="{{ goStory }}" style="cursor:pointer;color:#CFC6B8">OUR STORY<sc-if value="{{ isStory }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
+      <span onClick="{{ goRides }}" style="cursor:pointer;color:#CFC6B8">RIDES &amp; EVENTS<sc-if value="{{ isRides }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
+      <span onClick="{{ goMembers }}" style="cursor:pointer;color:#CFC6B8">MEMBERS<sc-if value="{{ isMembers }}"><span style="display:block;height:2px;background:#C9852A;margin-top:5px"></span></sc-if></span>
+      <span onClick="{{ goJoin }}" style="cursor:pointer;color:#0D0C0B;background:#C9852A;padding:10px 18px;font-weight:700">JOIN THE TRIBE</span>
+      <span style="display:flex;gap:14px;align-items:center;padding-left:12px;border-left:1px solid #2A241D">
+        <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" title="Instagram" style="color:#C9852A;display:flex;align-items:center" style-hover="color:#E8B45F">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/share/1F1cAzR7EV/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook" style="color:#C9852A;display:flex;align-items:center" style-hover="color:#E8B45F">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"></path>
+          </svg>
+        </a>
+      </span>
+    </nav>
+  </header>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <section style="position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:340px 5vw 80px;background-color:#0D0C0B;background-image:linear-gradient(180deg,rgba(13,12,11,0.15) 0%,rgba(13,12,11,0.45) 40%,rgba(13,12,11,0.88) 70%,#0D0C0B 100%),url('assets/hero-road.png');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat">
+      <img src="assets/throttle-tribe-logo.png" alt="Throttle Tribe UK" style="width:340px;max-width:70%;height:auto;display:block;margin-bottom:36px" />
+      <h1 style="margin:0;font-family:Anton,sans-serif;font-size:82px;line-height:0.94;letter-spacing:0.01em;color:#F3ECE0;max-width:14ch">THROTTLE TRIBE UK</h1>
+      <p style="margin:20px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:22px;letter-spacing:0.24em;color:#C9852A">UK-BASED RIDERS FROM INDIA</p>
+      <p style="margin:32px 0 0;font-family:Anton,sans-serif;font-size:30px;letter-spacing:0.06em;color:#E8D6AE">NO MAN LEFT BEHIND</p>
+      <p style="margin:24px 0 0;font-size:24px;font-weight:500;color:#F3ECE0;max-width:34ch">&ldquo;Different bikes. Different roads. One Tribe.&rdquo;</p>
+      <p style="margin:16px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:52ch">&ldquo;Bringing together Indian motorcycle riders across the UK for unforgettable rides, friendships and adventures.&rdquo;</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:40px">
+        <span onClick="{{ goJoin }}" style="cursor:pointer;padding:17px 30px;background:#C9852A;color:#0D0C0B;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.14em">JOIN THE TRIBE</span>
+        <span onClick="{{ goRides }}" style="cursor:pointer;padding:17px 30px;border:1px solid #6B5A42;color:#F3ECE0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.14em">VIEW UPCOMING RIDES</span>
+        <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" style="padding:17px 30px;border:1px solid #2A241D;color:#CFC6B8;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.14em">FOLLOW US ON INSTAGRAM</a>
+      </div>
+    </section>
+
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#2A241D;border-top:1px solid #2A241D;border-bottom:1px solid #2A241D">
+      <div style="background:#110F0D;padding:30px 40px"><span style="font-family:Anton,sans-serif;font-size:42px;color:#C9852A;display:block">112</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.18em;color:#8E8375">RIDERS IN THE TRIBE</span></div>
+      <div style="background:#110F0D;padding:30px 40px"><span style="font-family:Anton,sans-serif;font-size:42px;color:#C9852A;display:block">98</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.18em;color:#8E8375">RIDES COMPLETED</span></div>
+      <div style="background:#110F0D;padding:30px 40px"><span style="font-family:Anton,sans-serif;font-size:42px;color:#C9852A;display:block">100,000+</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.18em;color:#8E8375">MILES RIDDEN TOGETHER</span></div>
+      <div style="background:#110F0D;padding:30px 40px"><span style="font-family:Anton,sans-serif;font-size:42px;color:#C9852A;display:block">12</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.18em;color:#8E8375">COUNTRIES TOURED</span></div>
+    </section>
+
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:70px;padding:100px 5vw;align-items:center">
+      <div>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">OUR STORY</span>
+        <h2 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:52px;line-height:1.02;color:#F3ECE0">WHY THROTTLE TRIBE?</h2>
+        <p style="margin:26px 0 0;font-size:18px;line-height:1.75;color:#B6ADA1;max-width:54ch">Throttle Tribe started with a simple observation. Our founder saw thriving motorcycle communities throughout the UK but comparatively little visibility of Indian riders riding together. There were riders out there &mdash; but they weren&rsquo;t connected.</p>
+        <span onClick="{{ goStory }}" style="display:inline-block;margin-top:28px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.16em;color:#C9852A;border-bottom:1px solid #6B5A42;padding-bottom:6px">READ THE FULL STORY</span>
+      </div>
+      <div style="border:1px solid #2A241D;overflow:hidden;width:100%;max-width:1500px;justify-self:end">
+        <img src="assets/tribe-group-blackbushe.jpeg" alt="Throttle Tribe riders gathered at Blackbushe" style="display:block;width:100%;height:auto" />
+      </div>
+    </section>
+
+    <section style="position:relative;padding:130px 5vw;text-align:center;background:linear-gradient(180deg,rgba(13,12,11,0.68),rgba(13,12,11,0.92)),repeating-linear-gradient(115deg,#20190F 0px,#20190F 9px,#1A1409 9px,#1A1409 18px);border-top:1px solid #2A241D;border-bottom:1px solid #2A241D">
+      <h2 style="margin:0;font-family:Anton,sans-serif;font-size:86px;line-height:0.95;letter-spacing:0.02em;color:#E8D6AE">NO MAN LEFT BEHIND</h2>
+      <p style="margin:34px auto 0;font-size:19px;line-height:1.8;color:#C3BAAD;max-width:46ch">&ldquo;It isn&rsquo;t simply our motto. It defines how we ride.</p>
+      <div style="margin:26px auto 0;display:grid;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:21px;letter-spacing:0.16em;color:#F3ECE0">
+        <span>WE START TOGETHER.</span>
+        <span>WE RIDE TOGETHER.</span>
+        <span>WE LOOK AFTER ONE ANOTHER.</span>
+        <span>AND WE RETURN TOGETHER.&rdquo;</span>
+      </div>
+    </section>
+
+    <section style="padding:100px 5vw">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:end;justify-content:space-between;margin-bottom:46px">
+        <div>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">WHAT&rsquo;S COMING UP</span>
+          <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:52px;line-height:1;color:#F3ECE0">UPCOMING RIDES</h2>
+        </div>
+        <span onClick="{{ goRides }}" style="cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.16em;color:#C9852A;border-bottom:1px solid #6B5A42;padding-bottom:6px">SEE ALL RIDES</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+        <sc-for list="{{ featuredRides }}" as="ride" hint-placeholder-count="3">
+          <div onClick="{{ ride.open }}" style="cursor:pointer;border:1px solid #2A241D;background:#110F0D;display:flex;flex-direction:column">
+            <div style="aspect-ratio:16/10;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);border-bottom:1px solid #2A241D;display:flex;align-items:flex-end;padding:14px;overflow:hidden;position:relative">
+              <sc-if value="{{ ride.hasImage }}">
+                <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ ride.imageCss }}"></div>
+              </sc-if>
+              <sc-if value="{{ ride.noImage }}">
+                <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#6C6355;background:#0D0C0B;padding:6px 8px">{{ ride.imageNote }}</span>
+              </sc-if>
+            </div>
+            <div style="padding:24px">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#C9852A">{{ ride.date }}</span>
+              <h3 style="margin:10px 0 12px;font-family:Anton,sans-serif;font-size:26px;line-height:1.1;color:#F3ECE0">{{ ride.name }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.65;color:#9E958A">{{ ride.summary }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;padding-top:18px;border-top:1px solid #2A241D;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.1em;color:#8E8375">
+                <span>{{ ride.distance }}</span>
+                <span>{{ ride.duration }}</span>
+                <span>{{ ride.difficulty }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:0 5vw 100px">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:end;justify-content:space-between;margin-bottom:28px">
+        <h2 style="margin:0;font-family:Anton,sans-serif;font-size:46px;line-height:1;color:#F3ECE0">FOLLOW THE TRIBE</h2>
+        <div style="display:flex;gap:18px;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.16em">
+          <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener">INSTAGRAM</a>
+          <a href="https://www.facebook.com/share/1F1cAzR7EV/?mibextid=wwXIfr" target="_blank" rel="noopener">FACEBOOK</a>
+        </div>
+      </div>
+      <div style="columns:3 260px;column-gap:12px">
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-1-airfield.jpeg" alt="The Tribe at the airfield" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <video src="assets/gallery-video-1.mp4" controls="controls" playsinline="playsinline" preload="metadata" style="display:block;width:100%;height:auto;background:#0D0C0B"></video>
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-2-cafe.jpeg" alt="Riders at the café stop" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-3-lineup.jpeg" alt="Bikes lined up at a meeting point" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <video src="assets/gallery-video-2.mp4" controls="controls" playsinline="playsinline" preload="metadata" style="display:block;width:100%;height:auto;background:#0D0C0B"></video>
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-4-valkyrie.jpeg" alt="Honda Valkyrie at a charging stop" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-5-arch.jpeg" alt="Two riders at Stowe arch" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-6-blackbushe.jpeg" alt="The Tribe at Blackbushe" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-10-sevensisters.png" alt="The Tribe with the club flag at the Seven Sisters" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <video src="assets/gallery-video-3.mp4" controls="controls" playsinline="playsinline" preload="metadata" style="display:block;width:100%;height:auto;background:#0D0C0B"></video>
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-7-vrod.png" alt="Rider in a suit beside a Harley-Davidson V-Rod" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-9-sunset.png" alt="Harley-Davidson Fat Boy at sunset by the water" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <video src="assets/gallery-video-4.mp4" controls="controls" playsinline="playsinline" preload="metadata" style="display:block;width:100%;height:auto;background:#0D0C0B"></video>
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-8-speedtriple.png" alt="Rider with a Triumph Speed Triple at the fuel stop" style="display:block;width:100%;height:auto" />
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isStory }}">
+  <div>
+    <section style="padding:90px 5vw 60px;border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">OUR STORY</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:72px;line-height:0.98;color:#F3ECE0;max-width:16ch">WHY THROTTLE TRIBE?</h1>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:70px;padding:80px 5vw;align-items:start">
+      <div style="display:grid;gap:22px;font-size:19px;line-height:1.8;color:#C3BAAD;max-width:60ch">
+        <p style="margin:0">&ldquo;Throttle Tribe started with a simple observation.</p>
+        <p style="margin:0">Our founder, Rohit Sinha, saw thriving motorcycle communities throughout the UK but comparatively little visibility and representation of Indian riders riding together.</p>
+        <p style="margin:0;font-family:Anton,sans-serif;font-size:32px;line-height:1.25;color:#E8D6AE">There were riders out there &mdash; but they weren&rsquo;t connected.</p>
+        <p style="margin:0">Throttle Tribe was created to bring them together.</p>
+        <p style="margin:0">What started as an idea has become a growing community of riders connected by motorcycles, friendship, adventure and Indian roots.</p>
+        <p style="margin:0">It doesn&rsquo;t matter whether you ride a cruiser, superbike, adventure bike, sports tourer, classic or something completely different.</p>
+        <p style="margin:0;font-family:Anton,sans-serif;font-size:32px;line-height:1.25;color:#C9852A">When we ride together, we are one Tribe.&rdquo;</p>
+      </div>
+      <div style="width:100%;max-width:1080px;border:1px solid #2A241D;overflow:hidden">
+        <img src="assets/story-bafflehaus.jpeg" alt="The Tribe with the club flag outside Baffle Haus" style="display:block;width:100%;height:auto" />
+      </div>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:60px;padding:80px 5vw;background:#110F0D;border-top:1px solid #2A241D;border-bottom:1px solid #2A241D;align-items:center">
+      <div style="border:1px solid #2A241D;max-width:420px;overflow:hidden">
+        <img src="assets/founder-rohit.png" alt="Rohit Sinha, founder of Throttle Tribe UK" style="display:block;width:100%;height:auto" />
+      </div>
+      <div>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">FOUNDER</span>
+        <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:50px;line-height:1;color:#F3ECE0">ROHIT SINHA</h2>
+        <p style="margin:26px 0 0;font-size:21px;line-height:1.7;color:#C3BAAD;max-width:48ch;font-style:italic">&ldquo;Throttle Tribe was founded with a vision to create a strong, welcoming and visible community for Indian motorcycle riders across the United Kingdom.&rdquo;</p>
+      </div>
+    </section>
+    <section style="padding:90px 5vw">
+      <h2 style="margin:0 0 30px;font-family:Anton,sans-serif;font-size:50px;line-height:1;color:#F3ECE0">RIDE SAFETY</h2>
+      <p style="margin:0 0 40px;font-size:18px;line-height:1.75;color:#B6ADA1;max-width:70ch">Every rider is responsible for their own motorcycle, insurance, licence, protective equipment and compliance with UK road laws.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#2A241D;border:1px solid #2A241D">
+        <sc-for list="{{ safetyRules }}" as="rule" hint-placeholder-count="7">
+          <div style="background:#110F0D;padding:26px">
+            <span style="font-family:Anton,sans-serif;font-size:22px;color:#C9852A">{{ rule.n }}</span>
+            <p style="margin:12px 0 0;font-size:17px;line-height:1.6;color:#CFC6B8">{{ rule.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:40px 0 0;font-family:Anton,sans-serif;font-size:28px;line-height:1.3;color:#E8D6AE;max-width:34ch">&ldquo;No Man Left Behind does not mean unsafe riding. It means we look after each other.&rdquo;</p>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isRides }}">
+  <div>
+    <section style="padding:90px 5vw 50px;border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">RIDES &amp; EVENTS</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:72px;line-height:0.98;color:#F3ECE0">UPCOMING RIDES</h1>
+      <p style="margin:20px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">Organised group rides are the core of the Tribe. The rides below are sample entries &mdash; an administrator adds, edits and cancels rides once the site is live.</p>
+    </section>
+    <section style="padding:50px 5vw 90px">
+      <div style="display:grid;gap:18px">
+        <sc-for list="{{ rides }}" as="ride" hint-placeholder-count="6">
+          <div onClick="{{ ride.open }}" style="cursor:pointer;display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
+            <div style="aspect-ratio:16/11;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;padding:10px;overflow:hidden;position:relative">
+              <sc-if value="{{ ride.hasImage }}">
+                <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ ride.imageCss }}"></div>
+              </sc-if>
+              <sc-if value="{{ ride.noImage }}">
+                <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#6C6355">{{ ride.imageNote }}</span>
+              </sc-if>
+            </div>
+            <div style="min-width:0">
+              <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#C9852A">{{ ride.date }}</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.16em;color:#8E8375;border:1px solid #2A241D;padding:3px 9px">{{ ride.tag }}</span>
+              </div>
+              <h3 style="margin:10px 0 10px;font-family:Anton,sans-serif;font-size:30px;line-height:1.05;color:#F3ECE0">{{ ride.name }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A;max-width:70ch">{{ ride.summary }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.1em;color:#8E8375">
+                <span>MEET {{ ride.meetTime }} &middot; {{ ride.meetPoint }}</span>
+                <span>{{ ride.distance }}</span>
+                <span>{{ ride.duration }}</span>
+                <span>LEADER: {{ ride.leader }}</span>
+              </div>
+            </div>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em;color:#0D0C0B;background:#C9852A;padding:12px 20px;font-weight:700;white-space:nowrap">VIEW RIDE</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <sc-if value="{{ hasSelected }}">
+      <div onClick="{{ closeRide }}" style="position:fixed;inset:0;z-index:60;background:rgba(5,5,4,0.88);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
+        <div onClick="{{ stop }}" style="width:min(860px,100%);border:1px solid #2A241D;background:#100E0C">
+          <div style="aspect-ratio:21/9;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;justify-content:space-between;padding:16px;border-bottom:1px solid #2A241D;overflow:hidden;position:relative">
+            <sc-if value="{{ selHasImage }}">
+              <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ selImageCss }}"></div>
+            </sc-if>
+            <sc-if value="{{ selNoImage }}">
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6C6355;background:#0D0C0B;padding:7px 10px">{{ selImageNote }}</span>
+            </sc-if>
+            <span onClick="{{ closeRide }}" style="cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.16em;color:#CFC6B8;background:#0D0C0B;padding:8px 14px;border:1px solid #2A241D">CLOSE</span>
+          </div>
+          <div style="padding:32px">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#C9852A">{{ selDateLine }}</span>
+            <h2 style="margin:12px 0 16px;font-family:Anton,sans-serif;font-size:44px;line-height:1;color:#F3ECE0">{{ selName }}</h2>
+            <p style="margin:0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">{{ selDescription }}</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:#2A241D;border:1px solid #2A241D;margin-top:30px">
+              <sc-for list="{{ selFacts }}" as="fact" hint-placeholder-count="8">
+                <div style="background:#141210;padding:18px">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.18em;color:#8E8375;display:block">{{ fact.label }}</span>
+                  <span style="font-size:17px;color:#F3ECE0;display:block;margin-top:7px">{{ fact.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:28px;padding-top:24px;border-top:1px solid #2A241D">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#8E8375">WHO&rsquo;S RIDING</span>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px">
+                <sc-for list="{{ selAttendees }}" as="person" hint-placeholder-count="5">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.08em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">{{ person.label }}</span>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
+              <span onClick="{{ toggleRsvp }}" style="cursor:pointer;padding:15px 26px;background:{{ rsvpBg }};color:{{ rsvpFg }};border:1px solid #C9852A;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.14em">{{ rsvpLabel }}</span>
+              <a href="https://maps.google.com" target="_blank" rel="noopener" style="padding:15px 26px;border:1px solid #6B5A42;color:#F3ECE0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.14em">GOOGLE MAPS ROUTE</a>
+              <span style="padding:15px 26px;border:1px solid #2A241D;color:#CFC6B8;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.14em;cursor:pointer">ADD TO CALENDAR</span>
+              <span style="padding:15px 26px;border:1px solid #2A241D;color:#CFC6B8;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.14em;cursor:pointer">SHARE ON WHATSAPP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isMembers }}">
+  <div>
+    <section style="padding:90px 5vw 40px;border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">MEMBERS</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:72px;line-height:0.98;color:#F3ECE0">OUR MACHINES</h1>
+      <p style="margin:20px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:60ch">Sample rider profiles, shown to demonstrate the layout. No private contact details are displayed publicly.</p>
+    </section>
+    <section style="padding:34px 5vw 0;display:flex;flex-wrap:wrap;gap:10px">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="8">
+        <span onClick="{{ f.select }}" style="cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.16em;padding:10px 18px;border:1px solid {{ f.border }};color:{{ f.color }};background:{{ f.bg }}">{{ f.label }}</span>
+      </sc-for>
+    </section>
+    <section style="padding:34px 5vw 100px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
+        <sc-for list="{{ visibleMembers }}" as="m" hint-placeholder-count="6">
+          <div style="border:1px solid #2A241D;background:#110F0D">
+            <div style="aspect-ratio:4/5;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);border-bottom:1px solid #2A241D;display:flex;align-items:flex-end;padding:12px;position:relative;overflow:hidden">
+              <sc-if value="{{ m.hasPhoto }}">
+                <div style="position:absolute;inset:0;background-color:#0D0C0B;background-size:cover;background-position:center top;background-repeat:no-repeat;background-image:{{ m.photoCss }}"></div>
+              </sc-if>
+              <sc-if value="{{ m.noPhoto }}">
+                <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#6C6355;background:#0D0C0B;padding:5px 8px">{{ m.photoNote }}</span>
+              </sc-if>
+            </div>
+            <div style="padding:22px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+                <h3 style="margin:0;font-family:Anton,sans-serif;font-size:26px;color:#F3ECE0">{{ m.name }}</h3>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.16em;color:#C9852A">{{ m.style }}</span>
+              </div>
+              <p style="margin:8px 0 0;font-size:17px;color:#CFC6B8">{{ m.bike }}</p>
+              <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#9E958A">{{ m.intro }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;padding-top:16px;border-top:1px solid #2A241D;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.12em;color:#8E8375">
+                <span>{{ m.years }}</span>
+                <span>{{ m.favourite }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isJoin }}">
+  <div>
+    <section style="padding:90px 5vw 50px;border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">MEMBERSHIP</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:72px;line-height:0.98;color:#F3ECE0">JOIN THE TRIBE</h1>
+      <p style="margin:20px 0 0;font-size:19px;line-height:1.7;color:#B6ADA1;max-width:60ch">&ldquo;Ride a motorcycle in the UK and want to become part of a growing community of Indian riders? Introduce yourself to the Tribe.&rdquo;</p>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:50px;padding:60px 5vw 100px;align-items:start">
+      <form style="display:grid;gap:18px;border:1px solid #2A241D;background:#110F0D;padding:34px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px">
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">FULL NAME
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">EMAIL
+            <input type="email" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOBILE NUMBER
+            <input type="tel" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">TOWN / CITY
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOTORCYCLE MAKE
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">MOTORCYCLE MODEL
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">ENGINE CAPACITY (CC)
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">YEARS RIDING
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">LICENCE TYPE
+            <select style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px">
+              <option>Full (A)</option>
+              <option>A2</option>
+              <option>A1</option>
+              <option>CBT</option>
+            </select>
+          </label>
+          <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">INSTAGRAM HANDLE
+            <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+          </label>
+        </div>
+        <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">EMERGENCY CONTACT (OPTIONAL)
+          <input type="text" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px" />
+        </label>
+        <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">SHORT INTRODUCTION
+          <textarea rows="4" style="padding:13px;border:1px solid #2A241D;background:#0D0C0B;color:#F3ECE0;font-size:16px;resize:vertical"></textarea>
+        </label>
+        <label style="display:grid;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.16em;color:#8E8375">PROFILE / BIKE PHOTO
+          <span style="padding:22px;border:1px dashed #3A332A;color:#6C6355;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;text-align:center">Drag a photo here or click to upload</span>
+        </label>
+        <label style="display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.55;color:#CFC6B8">
+          <input type="checkbox" style="margin-top:4px;width:18px;height:18px;accent-color:#C9852A" />
+          <span>I agree to follow Throttle Tribe&rsquo;s riding and community guidelines.</span>
+        </label>
+        <button type="button" style="margin-top:6px;padding:18px;background:#C9852A;color:#0D0C0B;border:0;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.16em;cursor:pointer">REQUEST TO JOIN</button>
+      </form>
+      <div style="display:grid;gap:22px">
+        <div style="border:1px solid #2A241D;background:#110F0D;padding:30px">
+          <h2 style="margin:0;font-family:Anton,sans-serif;font-size:34px;line-height:1.05;color:#F3ECE0">GET IN TOUCH</h2>
+          <p style="margin:16px 0 0;font-size:17px;line-height:1.7;color:#B6ADA1">Not ready to join yet? Ask us anything &mdash; membership, rides, collaboration or sponsorship.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">MEMBERSHIP ENQUIRY</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">RIDE ENQUIRY</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">COLLABORATION</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">SPONSORSHIP</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.14em;color:#CFC6B8;border:1px solid #2A241D;padding:8px 14px">GENERAL ENQUIRY</span>
+          </div>
+          <p style="margin:24px 0 0;font-size:18px;color:#E8D6AE">throttletribe.uk@gmail.com</p>
+        </div>
+        <div style="border:1px solid #2A241D;background:#110F0D;padding:30px">
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:26px;color:#F3ECE0">WHAT HAPPENS NEXT</h3>
+          <div style="display:grid;gap:16px;margin-top:20px">
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">1</span>We read your introduction and check you ride in the UK.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">2</span>We add you to the Tribe group and send the ride guidelines.</p>
+            <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A"><span style="color:#C9852A;font-family:Anton,sans-serif;margin-right:10px">3</span>You come out on a breakfast ride and meet everyone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isRules }}">
+  <div>
+    <section style="padding:90px 5vw 50px;border-bottom:1px solid #2A241D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">THROTTLE TRIBE</span>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:66px;line-height:0.98;color:#F3ECE0">RULES &amp; TERMS</h1>
+      <p style="margin:20px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">How we ride together, and how we look after each other online.</p>
+    </section>
+
+    <section id="group-riding-rules" style="padding:80px 5vw">
+      <h2 style="margin:0 0 12px;font-family:Anton,sans-serif;font-size:46px;line-height:1;color:#F3ECE0">GROUP RIDING RULES</h2>
+      <p style="margin:0 0 36px;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:70ch">We will follow the same Second Man Drop-Off System used during our Wales trip.</p>
+      <div style="display:grid;gap:30px;max-width:88ch">
+        <div>
+          <h3 style="margin:0 0 12px;font-family:Anton,sans-serif;font-size:24px;color:#E8D6AE"><span style="color:#C9852A;margin-right:12px">1</span>Ride Leader and Tail-End Charlie</h3>
+          <ul style="margin:0;padding-left:22px;display:grid;gap:10px;font-size:17px;line-height:1.7;color:#CFC6B8">
+            <li>The Ride Leader will always remain at the front.</li>
+            <li>Tail-End Charlie (TEC) will always remain the last rider.</li>
+            <li>Both will be introduced during the ride briefing.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;font-family:Anton,sans-serif;font-size:24px;color:#E8D6AE"><span style="color:#C9852A;margin-right:12px">2</span>Second Man Drop-Off System</h3>
+          <ul style="margin:0;padding-left:22px;display:grid;gap:10px;font-size:17px;line-height:1.7;color:#CFC6B8">
+            <li>At every turn, junction or roundabout, the rider directly behind the Ride Leader must stop at a safe and clearly visible position and indicate the correct direction.</li>
+            <li>The marker must remain there until Tail-End Charlie arrives.</li>
+            <li>Once TEC arrives, the marker should safely rejoin the group just ahead of TEC.</li>
+            <li>If the second rider misses a junction, the next rider must mark it.</li>
+            <li>If you are unsure, always mark the junction.</li>
+            <li>If there is no marker at a junction, continue straight.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;font-family:Anton,sans-serif;font-size:24px;color:#E8D6AE"><span style="color:#C9852A;margin-right:12px">3</span>Riding Formation</h3>
+          <ul style="margin:0;padding-left:22px;display:grid;gap:10px;font-size:17px;line-height:1.7;color:#CFC6B8">
+            <li>Maintain a safe following distance and use a staggered formation wherever appropriate.</li>
+            <li>Do not overtake the Ride Leader.</li>
+            <li>Do not ride behind Tail-End Charlie.</li>
+            <li>Avoid unnecessary overtaking within the group.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;font-family:Anton,sans-serif;font-size:24px;color:#E8D6AE"><span style="color:#C9852A;margin-right:12px">4</span>Ride Your Own Ride</h3>
+          <ul style="margin:0;padding-left:22px;display:grid;gap:10px;font-size:17px;line-height:1.7;color:#CFC6B8">
+            <li>Never ride beyond your ability or take risks to catch up.</li>
+            <li>There is no need to follow the rider ahead closely&mdash;the marking system will guide everyone.</li>
+            <li>Always obey UK traffic laws, speed limits and the Highway Code.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" style="padding:80px 5vw;border-top:1px solid #2A241D;background:#110F0D">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">TERMS &amp; CONDITIONS</span>
+      <h2 style="margin:16px 0 8px;font-family:Anton,sans-serif;font-size:46px;line-height:1;color:#F3ECE0">***PLEASE READ***</h2>
+      <h3 style="margin:0 0 30px;font-family:Anton,sans-serif;font-size:24px;line-height:1.2;color:#E8D6AE">Throttle Tribe &ndash; Social Media &amp; Content Guidelines</h3>
+      <div style="display:grid;gap:20px;max-width:88ch;font-size:17px;line-height:1.75;color:#B6ADA1">
+        <p style="margin:0">Throttle Tribe is proud to have talented content creators and social media influencers within our group, and we fully encourage you to create, share, and grow amazing content showcasing our rides, events, and bikes.</p>
+        <p style="margin:0">At the same time, it&rsquo;s important that we all act responsibly and follow a few key group principles:</p>
+        <ul style="margin:0;padding-left:22px;display:grid;gap:12px;color:#CFC6B8">
+          <li>Always take consent from individuals before posting group photos, ride photos, or close-ups involving people or their bikes</li>
+          <li>Bike photos are absolutely welcome, but registration plates must be blurred before publishing on any social media platform.</li>
+          <li>Avoid posting identifiable details without permission, especially when someone has clearly expressed, they don&rsquo;t want to be on social media.</li>
+        </ul>
+        <p style="margin:0">This is also a shared responsibility. If you do not wish to be featured on social media, or want your bike/details kept private, it is equally important for individual members to proactively inform content creators or influencers at the time of rides or events.</p>
+        <p style="margin:0">This isn&rsquo;t about restricting creativity &mdash; it&rsquo;s about respect, safety, and trust. With the rise in bike-related crimes, exposing registration numbers online can put fellow riders at unnecessary risk.</p>
+        <p style="margin:0">We support our creators, we value your work, and we want to keep enabling great content &mdash; but always within the boundaries of group rules and mutual respect.</p>
+        <p style="margin:0">Remember, Throttle Tribe&rsquo;s motto &ldquo;No Rider Left Behind&rdquo; doesn&rsquo;t apply only on the road &mdash; it also applies off the road, online, and in how we look out for one another.</p>
+        <p style="margin:0;font-family:Anton,sans-serif;font-size:26px;line-height:1.3;color:#E8D6AE">Ride safe. Post safe. Keep the Tribe safe.</p>
+        <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:0.2em;color:#C9852A">THROTTLE TRIBE</p>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <footer style="border-top:1px solid #2A241D;background:#0A0908;padding:70px 5vw 40px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:44px;align-items:start">
+      <div>
+        <img src="assets/throttle-tribe-logo.png" alt="Throttle Tribe UK" style="width:110px;height:auto;display:block;margin-bottom:20px" />
+        <h3 style="margin:0;font-family:Anton,sans-serif;font-size:30px;color:#E8D6AE">THROTTLE TRIBE UK</h3>
+        <p style="margin:10px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.2em;color:#8E8375">UK-BASED RIDERS FROM INDIA</p>
+        <p style="margin:18px 0 0;font-family:Anton,sans-serif;font-size:20px;letter-spacing:0.05em;color:#C9852A">NO MAN LEFT BEHIND</p>
+      </div>
+      <div style="display:grid;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em">
+        <span onClick="{{ goHome }}" style="cursor:pointer;color:#CFC6B8">HOME</span>
+        <span onClick="{{ goStory }}" style="cursor:pointer;color:#CFC6B8">OUR STORY</span>
+        <span onClick="{{ goRides }}" style="cursor:pointer;color:#CFC6B8">RIDES &amp; EVENTS</span>
+        <span onClick="{{ goMembers }}" style="cursor:pointer;color:#CFC6B8">MEMBERS</span>
+        <span onClick="{{ goJoin }}" style="cursor:pointer;color:#CFC6B8">JOIN THE TRIBE</span>
+      </div>
+      <div style="display:grid;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em">
+        <a href="https://www.instagram.com/throttle_tribeuk?stkn=MW5xc3ZrZnRucjFycQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://www.facebook.com/share/1F1cAzR7EV/?mibextid=wwXIfr" target="_blank" rel="noopener">FACEBOOK</a>
+        <a href="mailto:throttletribe.uk@gmail.com" style="letter-spacing:0.04em;text-transform:none;font-family:Barlow,sans-serif;font-size:16px">throttletribe.uk@gmail.com</a>
+      </div>
+      <div style="display:grid;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em;color:#8E8375">
+        <span style="cursor:pointer">PRIVACY POLICY</span>
+        <span onClick="{{ goRules }}" style="cursor:pointer">GROUP RIDING RULES</span>
+        <span onClick="{{ goRules }}" style="cursor:pointer">TERMS &amp; CONDITIONS</span>
+        <span style="cursor:pointer">RIDE DISCLAIMER</span>
+      </div>
+    </div>
+    <div style="margin-top:50px;display:flex;justify-content:flex-end">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:14px;max-width:520px">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:0.22em;color:#C9852A">THE CHARITY WE SUPPORT</span>
+        <div style="display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:flex-end">
+          <img src="assets/dgr-26-logo.png" alt="The Distinguished Gentleman's Ride 2026" style="display:block;width:200px;height:auto" />
+          <img src="assets/hog-logo.png" alt="Harley Owners Group" style="display:block;width:200px;height:auto" />
+        </div>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:#8E8375;text-align:right">The Tribe rides annually for men&rsquo;s health and suicide prevention.</p>
+      </div>
+    </div>
+    <div style="margin-top:34px;padding-top:24px;border-top:1px solid #1C1814;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#6C6355">
+      <span>Copyright &copy; Throttle Tribe UK</span>
+      <span style="font-family:Anton,sans-serif;font-size:24px;letter-spacing:0.06em;color:#C9852A">FROM INDIA. RIDING BRITAIN. ONE TRIBE.</span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+const RIDES = [
+  { id:'sat', name:'Saturday Ride Out', tag:'DAY RIDE', date:'SAMPLE DATE', meetTime:'08:30', meetPoint:'Cobham Services, M25', summary:'A relaxed half-day loop through the lanes with a café stop halfway. Good first ride if you are new to the Tribe.', distance:'120 MILES', duration:'5 HOURS', difficulty:'EASY', leader:'TBC', imageNote:'photo: lanes ride out, 16:10', motorway:'Some', international:'No',
+    description:'Our regular Saturday loop. We leave together, keep a steady pace, and nobody gets dropped. Marshals hold every junction until the last rider is through.', stop:'Riverside Café', riders:'12–20' },
+  { id:'brk', name:'Sunday Breakfast Ride', tag:'MORNING', date:'SAMPLE DATE', meetTime:'07:45', meetPoint:'Rivington Barn car park', summary:'Early start, empty roads, big breakfast. Back home before lunch.', distance:'70 MILES', duration:'3 HOURS', difficulty:'EASY', leader:'TBC', imageNote:'photo: bikes outside a café, 16:10', motorway:'No', international:'No',
+    description:'The easiest way to meet the Tribe. Short route, no motorway, and a proper breakfast at the end of it.', stop:'Barn Café', riders:'10–25' },
+  { id:'coast', name:'UK Coastal Ride', tag:'DAY RIDE', date:'SAMPLE DATE', meetTime:'08:00', meetPoint:'TBC', summary:'A full day following the coast road, with a seafront lunch stop and a scenic return leg.', distance:'210 MILES', duration:'8 HOURS', difficulty:'MODERATE', leader:'TBC', imageNote:'photo: coastal road, 16:10', motorway:'Yes', international:'No',
+    description:'A longer day out. Bring waterproofs and fuel up before the meet — the first leg runs 90 miles without a planned stop.', stop:'Seafront lunch', riders:'8–16' },
+  { id:'peak', name:'Peak District Ride', tag:'DAY RIDE', date:'SAMPLE DATE', meetTime:'08:30', meetPoint:'TBC', summary:'Snake Pass, Winnats and the best of the Peaks, at a pace everybody is comfortable with.', distance:'180 MILES', duration:'7 HOURS', difficulty:'MODERATE', leader:'TBC', imageNote:'photo: Peak District pass, 16:10', motorway:'Some', international:'No',
+    description:'Technical in places and busy with traffic in season. Ride your own ride — the group regroups at every summit.', stop:'Castleton', riders:'8–18' },
+  { id:'wales', name:'Wales Weekend Ride', tag:'WEEKEND', date:'SAMPLE DATE', meetTime:'07:00', meetPoint:'TBC', summary:'Two days, one night, and the Evo Triangle. Accommodation booked as a group.', distance:'420 MILES', duration:'2 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: Welsh mountain road, 16:10', motorway:'Yes', international:'No',
+    description:'An overnight tour. Luggage capacity needed, and a bike comfortable at motorway speeds for the run out and back.', stop:'Overnight, Snowdonia', riders:'6–12' },
+  { id:'scot', name:'Scotland Motorcycle Tour', tag:'TOUR', date:'SAMPLE DATE', meetTime:'06:30', meetPoint:'TBC', summary:'The big one. NC500 territory, several days on the road, planned months in advance.', distance:'1,200 MILES', duration:'6 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: Highlands, 16:10', motorway:'Yes', international:'No',
+    description:'Our flagship tour. Places are limited and confirmed on a deposit. Full route pack issued to riders beforehand.', stop:'Multiple overnights', riders:'6–10' },
+  { id:'fr', name:'Let’s Go France 🇫🇷', tag:'INTERNATIONAL', date:'23–26 APRIL 2027', meetTime:'05:00', meetPoint:'Folkestone, Eurotunnel terminal', summary:'Cross the Channel with the Tribe for a long weekend of French roads and food.', distance:'600 MILES', duration:'4 DAYS', difficulty:'MODERATE', leader:'TBC', image:'assets/ride-france-alps.jpg', imageNote:'photo: French country road, 16:10', motorway:'Yes', international:'Yes',
+    description:'Passport, green card insurance and breakdown cover required. We book the crossing as a group to keep the cost down.', stop:'Overnight, Normandy', riders:'6–14' },
+  { id:'eu', name:'European Touring Weekend', tag:'INTERNATIONAL', date:'SAMPLE DATE', meetTime:'05:00', meetPoint:'TBC', summary:'Alpine passes and long days in the saddle, for riders with touring experience.', distance:'900 MILES', duration:'5 DAYS', difficulty:'CHALLENGING', leader:'TBC', imageNote:'photo: alpine pass, 16:10', motorway:'Yes', international:'Yes',
+    description:'A serious tour for experienced riders. High mileage days, mountain passes, and variable weather at altitude.', stop:'Multiple overnights', riders:'6–10' },
+];
+
+const MEMBERS = [
+  { name:'Rohit', style:'TOURING', bike:'Harley Davidson FatBoy Stage 1 - 114 & Honda Valkyrie 150', intro:'Commutes through London all week and escapes to the Cotswolds every weekend he can.', years:'30+ YEARS RIDING', favourite:'FAV: SNAKE PASS', photo:'assets/member-rohit.jpeg', photoNote:'member bike photo, 4:3' },
+  { name:'Shiwaan', style:'SPORTS', bike:'Yamaha MT-07', intro:'Passed her test two years ago and has not missed a breakfast ride since.', years:'2 YEARS RIDING', favourite:'FAV: COASTAL RIDE', photoNote:'member bike photo, 4:3' },
+  { name:'Hari', style:'ADVENTURE', bike:'BMW R 1300 GSA & Kawasaki Z900 RS', intro:'Rode in Delhi for a decade before moving to Birmingham. Happiest on a long straight road.', years:'14 YEARS RIDING', favourite:'FAV: WALES WEEKEND', photo:'assets/member-hari.jpeg', photoNote:'member bike photo, 4:3' },
+  { name:'Ali', style:'TOURING', bike:'BMW R 1250 RT', intro:'Has done the NC500 three times and will talk you through every mile of it.', years:'18 YEARS RIDING', favourite:'FAV: SCOTLAND TOUR', photo:'assets/member-ali.png', photoNote:'member bike photo, 4:3' },
+  { name:'Mohit', style:'TOURING', bike:'Harley Davidson Street Glide', intro:'Rides year-round, rain or shine, and marshals most of the Sunday rides.', years:'6 YEARS RIDING', favourite:'FAV: PEAK DISTRICT', photo:'assets/member-mohit.jpeg', photoNote:'member bike photo, 4:3' },
+  { name:'Dr Sanjeev', style:'CRUISER', bike:'Harley Davidson V-Rod', intro:'Restores old bikes in his garage in Leicester and brings a different one every month.', years:'11 YEARS RIDING', favourite:'FAV: FRANCE EASTER', photo:'assets/member-sanjeev.jpeg', photoNote:'member bike photo, 4:3' },
+];
+
+MEMBERS.push({ name:'Vasanth', style:'CRUISER', bike:'Triumph Rocket 3 & BMW R 1250 GSA', intro:'[Short rider introduction — send me a line in Vasanth’s own words.]', years:'[00] YEARS RIDING', favourite:'FAV: [RIDE]', photo:'assets/member-vasanth.jpeg', photoNote:'member bike photo, 4:3' });
+
+MEMBERS.push({ name:'Rakesh', style:'CRUISER', bike:'Royal Enfield Super Meteor 650', intro:'[Short rider introduction — send me a line in Rakesh’s own words.]', years:'[00] YEARS RIDING', favourite:'FAV: [RIDE]', photo:'assets/member-rakesh.png', photoNote:'member bike photo, 4:3' });
+
+const SAFETY = [
+  { n:'01', text:'Ride within your own ability.' },
+  { n:'02', text:'Maintain safe distances.' },
+  { n:'03', text:'Follow road laws and speed limits.' },
+  { n:'04', text:'Do not feel pressured to keep up.' },
+  { n:'05', text:'Look after the rider behind you.' },
+  { n:'06', text:'Follow ride-leader and marshal instructions.' },
+  { n:'07', text:'Never compromise safety to remain with the group.' },
+];
+
+class Component extends DCLogic {
+  state = { page: 'home', selected: null, rsvp: {}, filter: 'ALL' };
+
+  go(page) {
+    this.setState({ page, selected: null });
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  }
+
+  openRide(id) { this.setState({ page: 'rides', selected: id }); }
+
+  renderVals() {
+    const { page, selected, rsvp, filter } = this.state;
+    const sel = RIDES.find(r => r.id === selected) || null;
+    const going = sel ? !!rsvp[sel.id] : false;
+    const decorate = r => ({ ...r, hasImage: !!r.image, noImage: !r.image, imageCss: r.image ? `url('${r.image}')` : 'none', open: () => this.openRide(r.id) });
+    const styles = ['ALL', 'CRUISER', 'ADVENTURE', 'SPORTS', 'TOURING', 'CLASSIC', 'NAKED', 'OTHER'];
+
+    return {
+      isHome: page === 'home', isStory: page === 'story', isRides: page === 'rides',
+      isMembers: page === 'members', isJoin: page === 'join',
+      goHome: () => this.go('home'), goStory: () => this.go('story'),
+      goRides: () => this.go('rides'), goMembers: () => this.go('members'),
+      goJoin: () => this.go('join'),
+      isRules: page === 'rules',
+      goRules: () => this.go('rules'),
+
+      rides: RIDES.map(decorate),
+      featuredRides: [RIDES.find(r => r.id === 'fr'), ...RIDES.filter(r => r.id !== 'fr').slice(0, 2)].map(decorate),
+      gallerySlots: ['IG post','IG post','IG reel','IG post','IG post','IG post'].map((label, i) => ({ label, key: i })),
+      safetyRules: SAFETY,
+
+      hasSelected: !!sel,
+      selName: sel ? sel.name : '',
+      selImageNote: sel ? sel.imageNote : '',
+      selImage: sel && sel.image ? sel.image : '',
+      selImageCss: sel && sel.image ? `url('${sel.image}')` : 'none',
+      selHasImage: !!(sel && sel.image),
+      selNoImage: !!(sel && !sel.image),
+      selDescription: sel ? sel.description : '',
+      selDateLine: sel ? `${sel.date} · MEET ${sel.meetTime}` : '',
+      selFacts: sel ? [
+        { label:'MEETING POINT', value: sel.meetPoint },
+        { label:'DESTINATION', value: sel.name.replace(' Ride','') },
+        { label:'DISTANCE', value: sel.distance },
+        { label:'DURATION', value: sel.duration },
+        { label:'CAFÉ / LUNCH STOP', value: sel.stop },
+        { label:'RIDE LEADER', value: sel.leader },
+        { label:'DIFFICULTY', value: sel.difficulty },
+        { label:'MOTORWAY RIDING', value: sel.motorway },
+        { label:'INTERNATIONAL', value: sel.international },
+        { label:'RIDERS EXPECTED', value: sel.riders },
+      ] : [],
+      selAttendees: sel ? MEMBERS.slice(0, 5).map(m => ({ label: `${m.name} · ${m.bike}`, key: m.name })) : [],
+      closeRide: () => this.setState({ selected: null }),
+      stop: (e) => e.stopPropagation(),
+      toggleRsvp: () => sel && this.setState(s => ({ rsvp: { ...s.rsvp, [sel.id]: !s.rsvp[sel.id] } })),
+      rsvpLabel: going ? "YOU'RE RIDING — CANCEL RSVP" : 'RSVP — COUNT ME IN',
+      rsvpBg: going ? 'transparent' : '#C9852A',
+      rsvpFg: going ? '#C9852A' : '#0D0C0B',
+
+      filters: styles.map(s => ({
+        label: s, key: s,
+        select: () => this.setState({ filter: s }),
+        bg: filter === s ? '#C9852A' : 'transparent',
+        color: filter === s ? '#0D0C0B' : '#CFC6B8',
+        border: filter === s ? '#C9852A' : '#2A241D',
+      })),
+      visibleMembers: (filter === 'ALL' ? MEMBERS : MEMBERS.filter(m => m.style === filter))
+        .map(m => ({ ...m, hasPhoto: !!m.photo, noPhoto: !m.photo, photoCss: m.photo ? `url('${m.photo}')` : 'none' })),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
