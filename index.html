@@ -62,6 +62,17 @@
     [onclick], a, button, summary { -webkit-tap-highlight-color:rgba(201,133,42,0.25); }
     nav { gap:14px !important; row-gap:10px !important; }
   }
+  /* Rides & Events on phones */
+  @media (max-width:700px) {
+    .ride-row { grid-template-columns:1fr !important; gap:16px !important; padding:14px !important; }
+    .ride-cta { text-align:center; }
+    .ride-modal { padding:12px 10px !important; }
+    .ride-modal-hero { aspect-ratio:16/10 !important; }
+    .ride-modal-body { padding:22px 18px !important; }
+    .ride-actions > * { flex:1 1 100%; text-align:center; }
+    .ride-facts { grid-template-columns:1fr 1fr !important; }
+    .ride-facts > div { padding:14px !important; }
+  }
   @media (prefers-reduced-motion:reduce) {
     * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
   }
@@ -293,7 +304,7 @@
     <section style="padding:clamp(34px, 24px + 2.2vw, 50px) 5vw clamp(52px, 34px + 4.8vw, 90px)">
       <div style="display:grid;gap:18px">
         <sc-for list="{{ rides }}" as="ride" hint-placeholder-count="6">
-          <div onClick="{{ ride.open }}" style="cursor:pointer;display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
+          <div class="ride-row" onClick="{{ ride.open }}" style="cursor:pointer;display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
             <div style="aspect-ratio:16/11;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;padding:10px;overflow:hidden;position:relative">
               <sc-if value="{{ ride.hasImage }}">
                 <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ ride.imageCss }}"></div>
@@ -316,28 +327,28 @@
                 <span>LEADER: {{ ride.leader }}</span>
               </div>
             </div>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em;color:#0D0C0B;background:#C9852A;padding:12px 20px;font-weight:700;white-space:nowrap">VIEW RIDE</span>
+            <span class="ride-cta" style="font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.14em;color:#0D0C0B;background:#C9852A;padding:12px 20px;font-weight:700;white-space:nowrap">VIEW RIDE</span>
           </div>
         </sc-for>
       </div>
     </section>
     <sc-if value="{{ hasSelected }}">
-      <div onClick="{{ closeRide }}" style="position:fixed;inset:0;z-index:60;background:rgba(5,5,4,0.88);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
+      <div class="ride-modal" onClick="{{ closeRide }}" style="position:fixed;inset:0;z-index:60;background:rgba(5,5,4,0.88);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
         <div onClick="{{ stop }}" style="width:min(860px,100%);border:1px solid #2A241D;background:#100E0C">
-          <div style="aspect-ratio:21/9;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;justify-content:space-between;padding:16px;border-bottom:1px solid #2A241D;overflow:hidden;position:relative">
+          <div class="ride-modal-hero" style="aspect-ratio:21/9;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;justify-content:space-between;padding:16px;border-bottom:1px solid #2A241D;overflow:hidden;position:relative">
             <sc-if value="{{ selHasImage }}">
               <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ selImageCss }}"></div>
             </sc-if>
             <sc-if value="{{ selNoImage }}">
               <span style="font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.22em;color:#6B5A42;opacity:0.85">THROTTLE TRIBE</span>
             </sc-if>
-            <span onClick="{{ closeRide }}" style="cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.16em;color:#CFC6B8;background:#0D0C0B;padding:8px 14px;border:1px solid #2A241D">CLOSE</span>
+            <span onClick="{{ closeRide }}" style="position:relative;z-index:1;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.16em;color:#CFC6B8;background:#0D0C0B;padding:8px 14px;border:1px solid #2A241D">CLOSE</span>
           </div>
-          <div style="padding:32px">
+          <div class="ride-modal-body" style="padding:32px">
             <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#C9852A">{{ selDateLine }}</span>
             <h2 style="margin:12px 0 16px;font-family:Anton,sans-serif;font-size:clamp(25px, 18.3px + 1.78vw, 44px);line-height:1;color:#F3ECE0">{{ selName }}</h2>
             <p style="margin:0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">{{ selDescription }}</p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:#2A241D;border:1px solid #2A241D;margin-top:30px">
+            <div class="ride-facts" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:#2A241D;border:1px solid #2A241D;margin-top:30px">
               <sc-for list="{{ selFacts }}" as="fact" hint-placeholder-count="8">
                 <div style="background:#141210;padding:18px">
                   <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.18em;color:#8E8375;display:block">{{ fact.label }}</span>
@@ -345,7 +356,7 @@
                 </div>
               </sc-for>
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
+            <div class="ride-actions" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
               <span onClick="{{ toggleRsvp }}" style="cursor:pointer;padding:15px 26px;background:{{ rsvpBg }};color:{{ rsvpFg }};border:1px solid #C9852A;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.14em">{{ rsvpLabel }}</span>
               <sc-if value="{{ selHasMeetPoint }}">
                 <a href="{{ selMapsUrl }}" target="_blank" rel="noopener" style="padding:15px 26px;border:1px solid #6B5A42;color:#F3ECE0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.14em">MEETING POINT ON MAPS</a>
