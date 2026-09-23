@@ -56,6 +56,15 @@
   a:hover { color:#E8B45F; }
   input, textarea, select { font-family:Barlow, sans-serif; max-width:100%; }
   img, video { max-width:100%; }
+  /* Tribe logo as the pointer. Desktop only - a custom cursor is pointless on
+     touch, and the keyword fallback matters if the image ever fails to load. */
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: url('assets/cursor-logo.png') 4 2, auto; }
+    a, button, summary, input[type="checkbox"], [onclick], .tt-brand, .tt-members > * {
+      cursor: url('assets/cursor-logo.png') 4 2, pointer;
+    }
+    input, textarea, select { cursor: auto; }
+  }
   h1, h2, h3 { overflow-wrap:break-word; }
   /* Tap targets stay reachable on touch screens */
   @media (max-width:600px) {
@@ -900,26 +909,26 @@
     </div>
     <div class="tt-marquee" style="margin-top:clamp(28px, 20px + 2vw, 44px)">
       <div class="tt-track">
-        <span class="tt-brand" title="Honda"><svg viewBox="0 0 24 24" role="img" aria-label="Honda" focusable="false"><path fill="currentColor" d="M23.902 6.87c-.33-3.218-2.47-3.895-4.354-4.204-.946-.16-2.63-.3-3.716-.34-.946-.06-3.168-.09-3.835-.09-.657 0-2.89.03-3.835.09-1.076.04-2.77.18-3.716.34C2.563 2.985.42 3.66.092 6.87c-.08.877-.1 2.023-.09 3.248.03 2.031.2 3.406.3 4.363.07.657.338 2.62.687 3.636.478 1.395.916 1.803 1.424 2.222.937.757 2.471.996 2.79 1.056 1.733.31 5.24.368 6.784.368 1.544 0 5.05-.05 6.784-.368.329-.06 1.863-.29 2.79-1.056.508-.419.946-.827 1.424-2.222.35-1.016.628-2.979.698-3.636.1-.957.279-2.332.299-4.363.04-1.225.01-2.371-.08-3.248m-1.176 5.4c-.19 2.57-.418 4.104-.747 5.22-.29.976-.637 1.623-1.165 2.092-.867.787-2.063.956-2.76 1.056-1.514.23-4.055.3-6.057.3-2.002 0-4.543-.08-6.057-.3-.697-.1-1.893-.269-2.76-1.056-.518-.469-.876-1.126-1.155-2.093-.329-1.105-.558-2.65-.747-5.22-.11-1.543-.09-4.054.08-5.4.258-2.011 1.255-3.018 3.387-3.396.996-.18 2.34-.31 3.606-.37 1.016-.07 2.7-.1 3.636-.09.936-.01 2.62.03 3.636.09 1.275.06 2.61.19 3.606.37 2.142.378 3.139 1.395 3.388 3.397.199 1.345.229 3.856.11 5.4m-5.202-8.39c-.548 2.462-.767 3.588-1.216 5.37-.428 1.715-.767 3.298-1.335 4.065-.587.777-1.365.947-1.893 1.006-.279.03-.478.04-1.066.05-.596 0-.796-.02-1.075-.05-.528-.06-1.315-.229-1.892-1.006-.578-.767-.907-2.35-1.335-4.064-.47-1.773-.678-2.91-1.236-5.37 0 0-.548.02-.797.04-.329.02-.588.05-.867.09.343 5.372.692 11.079 1.126 16.13a21.983 21.983 0 002.39.169c.33-1.266.748-3.02 1.207-3.767.378-.608.966-.677 1.295-.717.518-.07.956-.08 1.165-.08.2-.01.637 0 1.165.08.33.05.917.11 1.295.717.47.747.877 2.5 1.206 3.766 0 0 .358-.01 1.165-.05.41-.018.82-.058 1.226-.12.458-5.39.785-10.728 1.126-16.128-.28-.04-.538-.07-.867-.09-.23-.02-.787-.04-.787-.04z"></path></svg></span>
+        <span class="tt-brand tt-brand-logo" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="320" /></span>
         <span class="tt-brand tt-brand-logo" title="Yamaha"><img src="assets/brands/yamaha.svg" alt="Yamaha" /></span>
         <span class="tt-brand tt-brand-logo" title="BMW"><img src="assets/brands/bmw.svg" alt="BMW" /></span>
         <span class="tt-brand tt-brand-logo" title="Ducati"><img src="assets/brands/ducati.svg" alt="Ducati" /></span>
         <span class="tt-brand tt-ktm" title="KTM"><svg viewBox="0 0 24 24" role="img" aria-label="KTM" focusable="false"><path fill="currentColor" d="M0 15.735h3.354l.843-2.06 1.55 2.06h7.225l2.234-2.081-.372 2.081h2.83L20 13.675l-.32 2.06h3.052L24 9.99h-3.068l-2.486 2.191.48-2.19h-2.942l-3.209 3.216 1.342-3.938h4.907l.225-1.003H6.381l-.378 1.003h4.732l-1.994 5.054-1.572-2.066L9.886 9.99H7.612l-2.787 2.23.938-2.23H2.44L0 15.735Z"></path></svg></span>
         <span class="tt-brand tt-brand-logo" title="Suzuki"><img src="assets/brands/suzuki.svg" alt="Suzuki" /></span>
-        <span class="tt-brand tt-brand-logo" title="Harley-Davidson"><img src="assets/brands/harley.png" alt="Harley-Davidson" width="320" height="261" /></span>
+        <span class="tt-brand tt-brand-logo" title="Harley-Davidson"><img src="assets/brands/harley.png" alt="Harley-Davidson" width="420" height="155" /></span>
         <span class="tt-brand tt-brand-logo" title="Royal Enfield"><img src="assets/brands/royal-enfield.png" alt="Royal Enfield" width="256" height="256" /></span>
         <span class="tt-brand tt-brand-logo" title="Triumph"><img src="assets/brands/triumph.png" alt="Triumph" width="256" height="240" /></span>
         <span class="tt-brand tt-brand-logo" title="Moto Guzzi"><img src="assets/brands/moto-guzzi.png" alt="Moto Guzzi" width="300" height="161" /></span>
         <span class="tt-brand tt-brand-logo" title="Indian Motorcycle"><img src="assets/brands/indian.png" alt="Indian Motorcycle" width="320" height="120" /></span>
         <span class="tt-brand tt-brand-logo" title="Victory"><img src="assets/brands/victory.png" alt="Victory Motorcycles" width="320" height="171" /></span>
         <span class="tt-brand tt-brand-logo" title="Kawasaki"><img src="assets/brands/kawasaki.svg" alt="Kawasaki" /></span>
-        <span class="tt-brand" aria-hidden="true" title="Honda"><svg viewBox="0 0 24 24" role="img" aria-label="Honda" focusable="false"><path fill="currentColor" d="M23.902 6.87c-.33-3.218-2.47-3.895-4.354-4.204-.946-.16-2.63-.3-3.716-.34-.946-.06-3.168-.09-3.835-.09-.657 0-2.89.03-3.835.09-1.076.04-2.77.18-3.716.34C2.563 2.985.42 3.66.092 6.87c-.08.877-.1 2.023-.09 3.248.03 2.031.2 3.406.3 4.363.07.657.338 2.62.687 3.636.478 1.395.916 1.803 1.424 2.222.937.757 2.471.996 2.79 1.056 1.733.31 5.24.368 6.784.368 1.544 0 5.05-.05 6.784-.368.329-.06 1.863-.29 2.79-1.056.508-.419.946-.827 1.424-2.222.35-1.016.628-2.979.698-3.636.1-.957.279-2.332.299-4.363.04-1.225.01-2.371-.08-3.248m-1.176 5.4c-.19 2.57-.418 4.104-.747 5.22-.29.976-.637 1.623-1.165 2.092-.867.787-2.063.956-2.76 1.056-1.514.23-4.055.3-6.057.3-2.002 0-4.543-.08-6.057-.3-.697-.1-1.893-.269-2.76-1.056-.518-.469-.876-1.126-1.155-2.093-.329-1.105-.558-2.65-.747-5.22-.11-1.543-.09-4.054.08-5.4.258-2.011 1.255-3.018 3.387-3.396.996-.18 2.34-.31 3.606-.37 1.016-.07 2.7-.1 3.636-.09.936-.01 2.62.03 3.636.09 1.275.06 2.61.19 3.606.37 2.142.378 3.139 1.395 3.388 3.397.199 1.345.229 3.856.11 5.4m-5.202-8.39c-.548 2.462-.767 3.588-1.216 5.37-.428 1.715-.767 3.298-1.335 4.065-.587.777-1.365.947-1.893 1.006-.279.03-.478.04-1.066.05-.596 0-.796-.02-1.075-.05-.528-.06-1.315-.229-1.892-1.006-.578-.767-.907-2.35-1.335-4.064-.47-1.773-.678-2.91-1.236-5.37 0 0-.548.02-.797.04-.329.02-.588.05-.867.09.343 5.372.692 11.079 1.126 16.13a21.983 21.983 0 002.39.169c.33-1.266.748-3.02 1.207-3.767.378-.608.966-.677 1.295-.717.518-.07.956-.08 1.165-.08.2-.01.637 0 1.165.08.33.05.917.11 1.295.717.47.747.877 2.5 1.206 3.766 0 0 .358-.01 1.165-.05.41-.018.82-.058 1.226-.12.458-5.39.785-10.728 1.126-16.128-.28-.04-.538-.07-.867-.09-.23-.02-.787-.04-.787-.04z"></path></svg></span>
+        <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="320" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Yamaha"><img src="assets/brands/yamaha.svg" alt="Yamaha" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="BMW"><img src="assets/brands/bmw.svg" alt="BMW" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Ducati"><img src="assets/brands/ducati.svg" alt="Ducati" /></span>
         <span class="tt-brand tt-ktm" aria-hidden="true" title="KTM"><svg viewBox="0 0 24 24" role="img" aria-label="KTM" focusable="false"><path fill="currentColor" d="M0 15.735h3.354l.843-2.06 1.55 2.06h7.225l2.234-2.081-.372 2.081h2.83L20 13.675l-.32 2.06h3.052L24 9.99h-3.068l-2.486 2.191.48-2.19h-2.942l-3.209 3.216 1.342-3.938h4.907l.225-1.003H6.381l-.378 1.003h4.732l-1.994 5.054-1.572-2.066L9.886 9.99H7.612l-2.787 2.23.938-2.23H2.44L0 15.735Z"></path></svg></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Suzuki"><img src="assets/brands/suzuki.svg" alt="Suzuki" /></span>
-        <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Harley-Davidson"><img src="assets/brands/harley.png" alt="Harley-Davidson" width="320" height="261" /></span>
+        <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Harley-Davidson"><img src="assets/brands/harley.png" alt="Harley-Davidson" width="420" height="155" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Royal Enfield"><img src="assets/brands/royal-enfield.png" alt="Royal Enfield" width="256" height="256" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Triumph"><img src="assets/brands/triumph.png" alt="Triumph" width="256" height="240" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Moto Guzzi"><img src="assets/brands/moto-guzzi.png" alt="Moto Guzzi" width="300" height="161" /></span>
@@ -995,7 +1004,7 @@ const MEMBERS = [
 
 MEMBERS.push({ name:'Vasanth', style:'CRUISER', bike:'Triumph Rocket 3 & BMW R 1250 GSA', intro:'', years:'30+ YEARS RIDING', favourite:'', photo:'assets/member-vasanth.jpeg', photoNote:'member bike photo, 4:3' });
 
-MEMBERS.push({ name:'Rakesh', style:'CRUISER', bike:'Royal Enfield Super Meteor 650', intro:'', years:'30+ YEARS RIDING', favourite:'', photo:'assets/member-rakesh.png', photoNote:'member bike photo, 4:3' });
+MEMBERS.push({ name:'Rakesh', style:'CRUISER', bike:'Royal Enfield Super Meteor 650', intro:'', years:'30+ YEARS RIDING', favourite:'', photo:'assets/member-rakesh.jpg', photoNote:'member bike photo, 4:3' });
 
 MEMBERS.push({ name:'Nilesh', style:'ADVENTURE', bike:'BMW R 1300 GS', intro:'Recently rode his GS all the way to Spain.', years:'30+ YEARS RIDING', favourite:'', photo:'assets/member-nilesh.jpeg', photoNote:'member bike photo, 4:3' });
 
@@ -1017,6 +1026,8 @@ MEMBERS.push({ name:'Gaurav', style:'TOURING', bike:'Harley-Davidson Road King',
 MEMBERS.push({ name:'Neeraj', style:'TOURING', bike:'BMW R 1250 RT', intro:'Current ride in the UK is a BMW R 1250 RT. Recent trips: the south of France coast, Belgium and the Netherlands in 2024 (2,350 miles); the full Konkan and Sahyadri belt on a 1300 GSA in October 2025 (5,600 km); the Spanish Pyrenees, Andorra and the French Riviera in May 2026 (2,700 miles); and an Alpine run through the French, Swiss, Italian and Austrian Alps taking in 27 passes, the German Black Forest, Luxembourg and Brussels in July 2026 (2,900 miles).', years:'', favourite:'', photo:'assets/member-neeraj.jpg', photoNote:'member bike photo, 4:3' });
 
 MEMBERS.push({ name:'Ronak', style:'ADVENTURE', bike:'Suzuki V-Strom DL650', intro:'', years:'', favourite:'', photo:'assets/member-ronak.jpg', photoNote:'member bike photo, 4:3' });
+
+MEMBERS.push({ name:'Mohit Sharma', style:'CRUISER', bike:'Royal Enfield Super Meteor 650', intro:'', years:'', favourite:'', photo:'assets/member-mohit-sharma.jpg', photoNote:'member bike photo, 4:3' });
 
 const SAFETY = [
   { n:'01', text:'Ride within your own ability.' },
