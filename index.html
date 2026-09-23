@@ -426,8 +426,43 @@
   <div>
     <section style="padding:clamp(52px, 34px + 4.8vw, 90px) 5vw clamp(34px, 24px + 2.2vw, 50px);border-bottom:1px solid #2A241D">
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">RIDES &amp; EVENTS</span>
-      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:clamp(32px, 17.9px + 3.76vw, 72px);line-height:0.98;color:#F3ECE0">UPCOMING RIDES</h1>
+      <h1 style="margin:16px 0 0;font-family:Anton,sans-serif;font-size:clamp(32px, 17.9px + 3.76vw, 72px);line-height:0.98;color:#F3ECE0">RIDES &amp; EVENTS</h1>
       <p style="margin:20px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">Organised group rides are the core of the Tribe. Dates marked TBA are being planned &mdash; confirmed dates and meeting points are shared in the Tribe group chat first.</p>
+    </section>
+
+    <section style="padding:clamp(40px, 28px + 2.6vw, 62px) 5vw clamp(20px, 14px + 1.4vw, 30px)">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">WHERE WE&rsquo;VE BEEN</span>
+      <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:clamp(26px, 19px + 1.88vw, 46px);line-height:1;color:#F3ECE0">PAST RIDES</h2>
+      <p style="margin:16px 0 0;font-size:17px;line-height:1.7;color:#B6ADA1;max-width:62ch">Where the Tribe has been lately.</p>
+      <div style="display:grid;gap:18px;margin-top:clamp(24px, 18px + 1.4vw, 34px)">
+        <sc-for list="{{ pastRides }}" as="ride" hint-placeholder-count="2">
+          <div class="ride-row" style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
+            <div style="aspect-ratio:16/11;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;justify-content:center;padding:10px;overflow:hidden;position:relative">
+              <sc-if value="{{ ride.hasImage }}">
+                <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ ride.imageCss }}"></div>
+              </sc-if>
+              <sc-if value="{{ ride.noImage }}">
+                <span style="font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.22em;color:#6B5A42;opacity:0.85">THROTTLE TRIBE</span>
+              </sc-if>
+            </div>
+            <div style="min-width:0">
+              <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+                <sc-if value="{{ ride.hasDate }}">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;color:#C9852A">{{ ride.date }}</span>
+                </sc-if>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.16em;color:#8E8375;border:1px solid #2A241D;padding:3px 9px">{{ ride.tag }}</span>
+              </div>
+              <h3 style="margin:10px 0 10px;font-family:Anton,sans-serif;font-size:clamp(21px, 17.8px + 0.85vw, 30px);line-height:1.05;color:#F3ECE0">{{ ride.name }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A;max-width:70ch">{{ ride.summary }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:clamp(34px, 24px + 2.2vw, 50px) 5vw 0">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">WHAT&rsquo;S COMING UP</span>
+      <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:clamp(26px, 19px + 1.88vw, 46px);line-height:1;color:#F3ECE0">UPCOMING RIDES</h2>
     </section>
     <section style="padding:clamp(34px, 24px + 2.2vw, 50px) 5vw clamp(52px, 34px + 4.8vw, 90px)">
       <div style="display:grid;gap:18px">
@@ -1039,6 +1074,11 @@ const RIDES = [
     description:'A European ride taking in the Furka Pass in the Swiss Alps. Dates, route and costs will be shared in the Tribe group chat.', stop:'TBC', riders:'TBC' },
 ];
 
+const PAST_RIDES = [
+  { id:'wales', name:'Wales Weekend', tag:'WEEKEND TOUR', date:'', summary:'Three days through the Welsh mountains, with the whole Tribe out together.' },
+  { id:'gala', name:'Throttle Tribe Gala Night', tag:'EVENT', date:'', summary:'The Tribe out of leathers and into suits for the night.' },
+];
+
 const MEMBERS = [
   { name:'Rohit', style:'TOURING', bike:'Harley Davidson FatBoy Stage 1 - 114 & Honda Valkyrie 150', intro:'Associated HOG member.', years:'30+ YEARS RIDING', favourite:'FAV: SNAKE PASS', photos:['assets/member-rohit.jpeg','assets/member-rohit-valkyrie.jpg'], photoNote:'member bike photo, 4:3' },
   { name:'Shiwaan', style:'SPORTS', bike:'Honda CB500F', intro:'Riding since 2013, with a bike trip to Ladakh among the highlights.', years:'13 YEARS RIDING', favourite:'FAV: COASTAL RIDE', photo:'assets/member-shiwaan.webp', photoNote:'member bike photo, 4:3' },
@@ -1118,6 +1158,10 @@ class Component extends DCLogic {
       goDisclaimer: () => this.go('disclaimer'),
 
       rides: RIDES.map(decorate),
+      pastRides: PAST_RIDES.map(r => ({ ...r,
+        hasImage: !!r.image, noImage: !r.image,
+        imageCss: r.image ? `url('${r.image}')` : 'none',
+        hasDate: !!r.date })),
       gallerySlots: ['IG post','IG post','IG reel','IG post','IG post','IG post'].map((label, i) => ({ label, key: i })),
       safetyRules: SAFETY,
 
