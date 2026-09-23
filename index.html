@@ -71,6 +71,15 @@
     [onclick], a, button, summary { -webkit-tap-highlight-color:rgba(201,133,42,0.25); }
     nav { gap:14px !important; row-gap:10px !important; }
   }
+  /* Past and upcoming rides sit side by side. Each column is roughly half
+     width, so the row cards drop their thumbnail column and stack instead. */
+  .tt-rides-split { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px, 1vw + 22px, 52px); align-items:start; }
+  .tt-rides-split .ride-row { grid-template-columns:1fr !important; gap:16px !important; }
+  .tt-rides-split .ride-row > div:first-child { aspect-ratio:16/9 !important; }
+  .tt-rides-split .ride-cta { justify-self:start; }
+  @media (max-width:980px) {
+    .tt-rides-split { grid-template-columns:1fr; gap:clamp(34px, 24px + 2.2vw, 50px); }
+  }
   /* Rides & Events on phones */
   @media (max-width:700px) {
     .ride-row { grid-template-columns:1fr !important; gap:16px !important; padding:14px !important; }
@@ -430,7 +439,9 @@
       <p style="margin:20px 0 0;font-size:18px;line-height:1.7;color:#B6ADA1;max-width:62ch">Organised group rides are the core of the Tribe. Dates marked TBA are being planned &mdash; confirmed dates and meeting points are shared in the Tribe group chat first.</p>
     </section>
 
-    <section style="padding:clamp(40px, 28px + 2.6vw, 62px) 5vw clamp(20px, 14px + 1.4vw, 30px)">
+    <section style="padding:clamp(40px, 28px + 2.6vw, 62px) 5vw clamp(52px, 34px + 4.8vw, 90px)">
+     <div class="tt-rides-split">
+      <div>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">WHERE WE&rsquo;VE BEEN</span>
       <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:clamp(26px, 19px + 1.88vw, 46px);line-height:1;color:#F3ECE0">PAST RIDES</h2>
       <p style="margin:16px 0 0;font-size:17px;line-height:1.7;color:#B6ADA1;max-width:62ch">Where the Tribe has been lately.</p>
@@ -458,14 +469,13 @@
           </div>
         </sc-for>
       </div>
-    </section>
+      </div>
 
-    <section style="padding:clamp(34px, 24px + 2.2vw, 50px) 5vw 0">
+      <div>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.28em;color:#C9852A">WHAT&rsquo;S COMING UP</span>
       <h2 style="margin:14px 0 0;font-family:Anton,sans-serif;font-size:clamp(26px, 19px + 1.88vw, 46px);line-height:1;color:#F3ECE0">UPCOMING RIDES</h2>
-    </section>
-    <section style="padding:clamp(34px, 24px + 2.2vw, 50px) 5vw clamp(52px, 34px + 4.8vw, 90px)">
-      <div style="display:grid;gap:18px">
+      <p style="margin:16px 0 0;font-size:17px;line-height:1.7;color:#B6ADA1;max-width:62ch">Dates marked TBA are still being planned.</p>
+      <div style="display:grid;gap:18px;margin-top:clamp(24px, 18px + 1.4vw, 34px)">
         <sc-for list="{{ rides }}" as="ride" hint-placeholder-count="6">
           <div class="ride-row" onClick="{{ ride.open }}" style="cursor:pointer;display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
             <div style="aspect-ratio:16/11;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;padding:10px;overflow:hidden;position:relative">
@@ -494,6 +504,8 @@
           </div>
         </sc-for>
       </div>
+      </div>
+     </div>
     </section>
     <sc-if value="{{ hasSelected }}">
       <div class="ride-modal" onClick="{{ closeRide }}" style="position:fixed;inset:0;z-index:60;background:rgba(5,5,4,0.88);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
