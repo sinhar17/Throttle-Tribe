@@ -97,6 +97,33 @@
   .tt-brand-logo img { height:clamp(38px, 4.9vw, 58px); width:auto; display:block; }
   .tt-brand-word { font-family:Anton, sans-serif; font-size:clamp(17px, 2.3vw, 27px); letter-spacing:0.03em; white-space:nowrap; }
   @keyframes tt-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  /* Members scroll sideways on every device. Stacking each rider vertically
+     makes the page unusably long once the Tribe grows past a handful. */
+  .tt-members {
+    display:flex !important;
+    grid-template-columns:none !important;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:#3A332A transparent;
+    gap:22px !important;
+    padding-bottom:16px;
+    /* run cards to the screen edge while keeping the section gutter */
+    margin:0 -5vw;
+    padding-left:5vw;
+    padding-right:5vw;
+    scroll-padding-left:5vw;
+  }
+  .tt-members > * { flex:0 0 300px; scroll-snap-align:start; }
+  .tt-members::-webkit-scrollbar { height:8px; }
+  .tt-members::-webkit-scrollbar-thumb { background:#3A332A; border-radius:4px; }
+  .tt-members::-webkit-scrollbar-thumb:hover { background:#6B5A42; }
+  .tt-members::-webkit-scrollbar-track { background:#1A1611; border-radius:4px; }
+  @media (max-width:760px) {
+    .tt-members { gap:14px !important; padding-bottom:14px; }
+    .tt-members > * { flex:0 0 76%; }
+  }
   @media (prefers-reduced-motion:reduce) {
     .tt-track { animation:none; }
     .tt-marquee { overflow-x:auto; }
@@ -418,7 +445,7 @@
       </sc-for>
     </section>
     <section style="padding:34px 5vw clamp(56px, 36px + 5.2vw, 100px)">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
+      <div class="tt-members" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
         <sc-for list="{{ visibleMembers }}" as="m" hint-placeholder-count="6">
           <div style="border:1px solid #2A241D;background:#110F0D">
             <div style="aspect-ratio:4/5;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);border-bottom:1px solid #2A241D;display:flex;align-items:flex-end;padding:12px;position:relative;overflow:hidden">
@@ -945,6 +972,7 @@ MEMBERS.push({ name:'Rakesh', style:'CRUISER', bike:'Royal Enfield Super Meteor 
 MEMBERS.push({ name:'Nilesh', style:'ADVENTURE', bike:'BMW R 1300 GS', intro:'Recently rode his GS all the way to Spain.', years:'30+ YEARS RIDING', favourite:'', photo:'assets/member-nilesh.jpeg', photoNote:'member bike photo, 4:3' });
 
 MEMBERS.push({ name:'Capt. Manish Tyagi', style:'CRUISER', bike:'Harley-Davidson Fat Boy 114 in the UK & Yamaha RX100 in India', intro:'', years:'35+ YEARS RIDING', favourite:'', photo:'assets/member-manish.jpg', photoNote:'member bike photo, 4:3' });
+MEMBERS.push({ name:'Kedar', style:'CRUISER', bike:'Harley-Davidson', intro:'Associated HOG member.', years:'25 YEARS RIDING', favourite:'FAV: THE GOTTHARD PASS, SWISS ALPS', photoNote:'member bike photo, 4:3' });
 
 const SAFETY = [
   { n:'01', text:'Ride within your own ability.' },
