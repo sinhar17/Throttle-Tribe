@@ -108,6 +108,40 @@
   .tt-brand-logo img { height:clamp(38px, 4.9vw, 58px); width:auto; display:block; }
   .tt-brand-word { font-family:Anton, sans-serif; font-size:clamp(17px, 2.3vw, 27px); letter-spacing:0.03em; white-space:nowrap; }
   @keyframes tt-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  /* Per-member photo carousel. Which slide shows is driven purely by the
+     container's data-idx, so a framework re-render restores a valid state
+     without needing JS to re-initialise. */
+  .tt-photos { position:absolute; inset:0; }
+  .tt-photo {
+    position:absolute; inset:0; opacity:0; transition:opacity .35s ease;
+    background-color:#0D0C0B; background-size:cover;
+    background-position:center top; background-repeat:no-repeat;
+  }
+  .tt-photos[data-idx="0"] .tt-photo:nth-of-type(1),
+  .tt-photos[data-idx="1"] .tt-photo:nth-of-type(2),
+  .tt-photos[data-idx="2"] .tt-photo:nth-of-type(3),
+  .tt-photos[data-idx="3"] .tt-photo:nth-of-type(4),
+  .tt-photos[data-idx="4"] .tt-photo:nth-of-type(5),
+  .tt-photos[data-idx="5"] .tt-photo:nth-of-type(6) { opacity:1; }
+  .tt-arrow {
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%;
+    background:rgba(13,12,11,0.62); border:1px solid #2A241D;
+    color:#F3ECE0; font-family:Barlow, sans-serif; font-size:22px; line-height:1;
+    cursor:pointer; user-select:none; opacity:0; transition:opacity .2s ease, background .2s ease;
+  }
+  .tt-arrow:hover { background:#C9852A; color:#0D0C0B; }
+  .tt-prev { left:8px; } .tt-next { right:8px; }
+  /* Revealed on hover for mice; always visible on touch, which has no hover. */
+  .tt-photos:hover .tt-arrow, .tt-arrow:focus-visible { opacity:1; }
+  @media (hover: none) { .tt-arrow { opacity:0.85; } }
+  .tt-count {
+    position:absolute; top:10px; right:10px; z-index:3;
+    font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:0.12em;
+    color:#E8D6AE; background:rgba(13,12,11,0.62); border:1px solid #2A241D;
+    padding:3px 8px;
+  }
   /* Members scroll sideways on every device. Stacking each rider vertically
      makes the page unusably long once the Tribe grows past a handful. */
   .tt-members {
@@ -481,7 +515,16 @@
           <div style="border:1px solid #2A241D;background:#110F0D">
             <div style="aspect-ratio:4/5;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);border-bottom:1px solid #2A241D;display:flex;align-items:flex-end;padding:12px;position:relative;overflow:hidden">
               <sc-if value="{{ m.hasPhoto }}">
-                <div style="position:absolute;inset:0;background-color:#0D0C0B;background-size:cover;background-position:center top;background-repeat:no-repeat;background-image:{{ m.photoCss }}"></div>
+                <div class="tt-photos" data-idx="0">
+                  <sc-for list="{{ m.photos }}" as="p" hint-placeholder-count="2">
+                    <div class="tt-photo" style="background-image:{{ p.css }}"></div>
+                  </sc-for>
+                  <sc-if value="{{ m.multi }}">
+                    <span class="tt-arrow tt-prev" role="button" tabindex="0" aria-label="Previous bike">&#8249;</span>
+                    <span class="tt-arrow tt-next" role="button" tabindex="0" aria-label="Next bike">&#8250;</span>
+                    <span class="tt-count">{{ m.photoCount }}</span>
+                  </sc-if>
+                </div>
               </sc-if>
               <sc-if value="{{ m.noPhoto }}">
                 <span style="font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.22em;color:#6B5A42;opacity:0.85">THROTTLE TRIBE</span>
@@ -909,7 +952,7 @@
     </div>
     <div class="tt-marquee" style="margin-top:clamp(28px, 20px + 2vw, 44px)">
       <div class="tt-track">
-        <span class="tt-brand tt-brand-logo" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="320" /></span>
+        <span class="tt-brand tt-brand-logo" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="250" /></span>
         <span class="tt-brand tt-brand-logo" title="Yamaha"><img src="assets/brands/yamaha.svg" alt="Yamaha" /></span>
         <span class="tt-brand tt-brand-logo" title="BMW"><img src="assets/brands/bmw.svg" alt="BMW" /></span>
         <span class="tt-brand tt-brand-logo" title="Ducati"><img src="assets/brands/ducati.svg" alt="Ducati" /></span>
@@ -922,7 +965,7 @@
         <span class="tt-brand tt-brand-logo" title="Indian Motorcycle"><img src="assets/brands/indian.png" alt="Indian Motorcycle" width="320" height="120" /></span>
         <span class="tt-brand tt-brand-logo" title="Victory"><img src="assets/brands/victory.png" alt="Victory Motorcycles" width="320" height="171" /></span>
         <span class="tt-brand tt-brand-logo" title="Kawasaki"><img src="assets/brands/kawasaki.svg" alt="Kawasaki" /></span>
-        <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="320" /></span>
+        <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Honda"><img src="assets/brands/honda.png" alt="Honda" width="320" height="250" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Yamaha"><img src="assets/brands/yamaha.svg" alt="Yamaha" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="BMW"><img src="assets/brands/bmw.svg" alt="BMW" /></span>
         <span class="tt-brand tt-brand-logo" aria-hidden="true" title="Ducati"><img src="assets/brands/ducati.svg" alt="Ducati" /></span>
@@ -994,7 +1037,7 @@ const RIDES = [
 ];
 
 const MEMBERS = [
-  { name:'Rohit', style:'TOURING', bike:'Harley Davidson FatBoy Stage 1 - 114 & Honda Valkyrie 150', intro:'Associated HOG member.', years:'30+ YEARS RIDING', favourite:'FAV: SNAKE PASS', photo:'assets/member-rohit.jpeg', photoNote:'member bike photo, 4:3' },
+  { name:'Rohit', style:'TOURING', bike:'Harley Davidson FatBoy Stage 1 - 114 & Honda Valkyrie 150', intro:'Associated HOG member.', years:'30+ YEARS RIDING', favourite:'FAV: SNAKE PASS', photos:['assets/member-rohit.jpeg','assets/member-rohit-valkyrie.jpg'], photoNote:'member bike photo, 4:3' },
   { name:'Shiwaan', style:'SPORTS', bike:'Honda CB500F', intro:'Riding since 2013, with a bike trip to Ladakh among the highlights.', years:'13 YEARS RIDING', favourite:'FAV: COASTAL RIDE', photo:'assets/member-shiwaan.webp', photoNote:'member bike photo, 4:3' },
   { name:'Hari', style:'ADVENTURE', bike:'BMW R 1300 GSA & Kawasaki Z900 RS', intro:'Rode in Delhi for a decade before moving to Birmingham. Happiest on a long straight road.', years:'30+ YEARS RIDING', favourite:'FAV: WALES WEEKEND', photo:'assets/member-hari.jpeg', photoNote:'member bike photo, 4:3' },
   { name:'Ali', style:'TOURING', bike:'Triumph Rocket 3, Victory & Ducati Diavel', intro:'Has done the NC500 three times and will talk you through every mile of it.', years:'30+ YEARS RIDING', favourite:'FAV: SCOTLAND TOUR', photo:'assets/member-ali.png', photoNote:'member bike photo, 4:3' },
@@ -1122,8 +1165,15 @@ class Component extends DCLogic {
         border: filter === s ? '#C9852A' : '#2A241D',
       })),
       visibleMembers: (filter === 'ALL' ? MEMBERS : MEMBERS.filter(m => m.style === filter))
-        .map(m => ({ ...m, hasPhoto: !!m.photo, noPhoto: !m.photo, photoCss: m.photo ? `url('${m.photo}')` : 'none',
-          hasIntro: !!m.intro, hasMeta: !!(m.years || m.favourite) })),
+        .map(m => {
+          // `photos` (one per bike) is preferred; `photo` stays supported for single-bike riders.
+          const pics = m.photos && m.photos.length ? m.photos : (m.photo ? [m.photo] : []);
+          return { ...m,
+            hasPhoto: pics.length > 0, noPhoto: pics.length === 0,
+            photos: pics.map((p, i) => ({ css: `url('${p}')`, key: m.name + i })),
+            multi: pics.length > 1, photoCount: pics.length > 1 ? '1 / ' + pics.length : '',
+            hasIntro: !!m.intro, hasMeta: !!(m.years || m.favourite) };
+        }),
     };
   }
 }
@@ -1156,6 +1206,31 @@ class Component extends DCLogic {
     requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
+
+
+  function slide(arrow, dir) {
+    var box = arrow.parentNode;
+    var n = box.querySelectorAll('.tt-photo').length;
+    if (n < 2) return;
+    var i = parseInt(box.getAttribute('data-idx'), 10) || 0;
+    i = ((i + dir) % n + n) % n;
+    box.setAttribute('data-idx', i);
+    var label = box.querySelector('.tt-count');
+    if (label) label.textContent = (i + 1) + ' / ' + n;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.tt-arrow');
+    if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    slide(a, a.classList.contains('tt-next') ? 1 : -1);
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var a = e.target.closest && e.target.closest('.tt-arrow');
+    if (!a) return;
+    e.preventDefault();
+    slide(a, a.classList.contains('tt-next') ? 1 : -1);
+  }, true);
 
   function touched(e) { if (e.target.closest && e.target.closest('.tt-members')) lastTouched = Date.now(); }
   ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (t) {
