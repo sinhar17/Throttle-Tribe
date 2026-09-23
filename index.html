@@ -450,7 +450,16 @@
           <div class="ride-row" style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:center;border:1px solid #2A241D;background:#110F0D;padding:18px">
             <div style="aspect-ratio:16/11;background:repeating-linear-gradient(115deg,#1A1611 0px,#1A1611 9px,#151109 9px,#151109 18px);display:flex;align-items:flex-end;justify-content:center;padding:10px;overflow:hidden;position:relative">
               <sc-if value="{{ ride.hasImage }}">
-                <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-image:{{ ride.imageCss }}"></div>
+                <div class="tt-photos" data-idx="0">
+                  <sc-for list="{{ ride.photos }}" as="p" hint-placeholder-count="3">
+                    <div class="tt-photo" style="background-position:center;background-image:{{ p.css }}"></div>
+                  </sc-for>
+                  <sc-if value="{{ ride.multi }}">
+                    <span class="tt-arrow tt-prev" role="button" tabindex="0" aria-label="Previous photo">&#8249;</span>
+                    <span class="tt-arrow tt-next" role="button" tabindex="0" aria-label="Next photo">&#8250;</span>
+                    <span class="tt-count">{{ ride.photoCount }}</span>
+                  </sc-if>
+                </div>
               </sc-if>
               <sc-if value="{{ ride.noImage }}">
                 <span style="font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.22em;color:#6B5A42;opacity:0.85">THROTTLE TRIBE</span>
@@ -465,6 +474,9 @@
               </div>
               <h3 style="margin:10px 0 10px;font-family:Anton,sans-serif;font-size:clamp(21px, 17.8px + 0.85vw, 30px);line-height:1.05;color:#F3ECE0">{{ ride.name }}</h3>
               <p style="margin:0;font-size:16px;line-height:1.6;color:#9E958A;max-width:70ch">{{ ride.summary }}</p>
+              <sc-if value="{{ ride.hasTagline }}">
+                <p style="margin:14px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.12em;line-height:1.6;color:#C9852A">{{ ride.tagline }}</p>
+              </sc-if>
             </div>
           </div>
         </sc-for>
@@ -1088,7 +1100,10 @@ const RIDES = [
 
 const PAST_RIDES = [
   { id:'wales', name:'Wales Weekend', tag:'WEEKEND TOUR', date:'', summary:'Three days through the Welsh mountains, with the whole Tribe out together.' },
-  { id:'gala', name:'Throttle Tribe Gala Ride', tag:'EVENT', date:'', summary:'The Tribe out of leathers and into suits, and out on the road.' },
+  { id:'gala', name:'Gala Ride — Celebrating 100 Members', tag:'MILESTONE RIDE', date:'15–16 AUGUST',
+    summary:'A milestone ride celebrating Throttle Tribe reaching 100 members. The adventure kicked off on 15 August in Ebbsfleet, combining our Independence Day celebrations with a ride to Hastings and the iconic Seven Sisters Cliffs. After an unforgettable evening celebrating with the boys, the journey continued the next day with a scenic ride through the Cotswolds.',
+    tagline:'100 Members. Two Days. Great Roads. One Tribe. No Man Left Behind.',
+    photos:['assets/past-gala-1.jpg','assets/past-gala-2.jpg','assets/past-gala-3.jpg'] },
 ];
 
 const MEMBERS = [
@@ -1170,10 +1185,14 @@ class Component extends DCLogic {
       goDisclaimer: () => this.go('disclaimer'),
 
       rides: RIDES.map(decorate),
-      pastRides: PAST_RIDES.map(r => ({ ...r,
-        hasImage: !!r.image, noImage: !r.image,
-        imageCss: r.image ? `url('${r.image}')` : 'none',
-        hasDate: !!r.date })),
+      pastRides: PAST_RIDES.map(r => {
+        const pics = r.photos && r.photos.length ? r.photos : (r.image ? [r.image] : []);
+        return { ...r,
+          hasImage: pics.length > 0, noImage: pics.length === 0,
+          photos: pics.map((p, i) => ({ css: `url('${p}')`, key: r.id + i })),
+          multi: pics.length > 1, photoCount: pics.length > 1 ? '1 / ' + pics.length : '',
+          hasDate: !!r.date, hasTagline: !!r.tagline };
+      }),
       gallerySlots: ['IG post','IG post','IG reel','IG post','IG post','IG post'].map((label, i) => ({ label, key: i })),
       safetyRules: SAFETY,
 
