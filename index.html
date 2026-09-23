@@ -105,7 +105,6 @@
     display:flex !important;
     grid-template-columns:none !important;
     overflow-x:auto;
-    scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:thin;
     scrollbar-color:#3A332A transparent;
@@ -117,7 +116,7 @@
     padding-right:5vw;
     scroll-padding-left:5vw;
   }
-  .tt-members > * { flex:0 0 300px; scroll-snap-align:start; }
+  .tt-members > * { flex:0 0 300px; }
   .tt-members::-webkit-scrollbar { height:8px; }
   .tt-members::-webkit-scrollbar-thumb { background:#3A332A; border-radius:4px; }
   .tt-members::-webkit-scrollbar-thumb:hover { background:#6B5A42; }
@@ -299,6 +298,27 @@
         </div>
         <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
           <img src="assets/gallery-11-velocity-stacks.webp" alt="Chrome velocity stacks on a six-cylinder engine" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-13-suits.jpg" alt="The Tribe in suits at the Distinguished Gentleman&rsquo;s Ride" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-14-marina-night.jpg" alt="Two bikes at the marina at dusk" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-15-marina-pair.jpg" alt="Triumph Rocket 3 and Harley Fat Boy on the boardwalk" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-16-marina-rider.jpg" alt="Rider between two bikes at the marina" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-17-rocket-road.jpg" alt="Triumph Rocket 3 on a mountain road" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-18-two-riders.jpg" alt="Two riders with their bikes on a spring ride" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+        <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
+          <img src="assets/gallery-19-goldwing.jpg" alt="Honda Gold Wing on the moor" loading="lazy" style="display:block;width:100%;height:auto" />
         </div>
         <div style="break-inside:avoid;margin-bottom:12px;border:1px solid #2A241D;overflow:hidden">
           <a href="assets/gallery-12-spiti-valley.webp" target="_blank" rel="noopener" title="Open full size">
@@ -996,6 +1016,8 @@ MEMBERS.push({ name:'Gaurav', style:'TOURING', bike:'Harley-Davidson Road King',
 
 MEMBERS.push({ name:'Neeraj', style:'TOURING', bike:'BMW R 1250 RT', intro:'Current ride in the UK is a BMW R 1250 RT. Recent trips: the south of France coast, Belgium and the Netherlands in 2024 (2,350 miles); the full Konkan and Sahyadri belt on a 1300 GSA in October 2025 (5,600 km); the Spanish Pyrenees, Andorra and the French Riviera in May 2026 (2,700 miles); and an Alpine run through the French, Swiss, Italian and Austrian Alps taking in 27 passes, the German Black Forest, Luxembourg and Brussels in July 2026 (2,900 miles).', years:'', favourite:'', photo:'assets/member-neeraj.jpg', photoNote:'member bike photo, 4:3' });
 
+MEMBERS.push({ name:'Ronak', style:'ADVENTURE', bike:'Suzuki V-Strom DL650', intro:'', years:'', favourite:'', photo:'assets/member-ronak.jpg', photoNote:'member bike photo, 4:3' });
+
 const SAFETY = [
   { n:'01', text:'Ride within your own ability.' },
   { n:'02', text:'Maintain safe distances.' },
@@ -1095,6 +1117,43 @@ class Component extends DCLogic {
   }
 }
 
+</script>
+
+<script>
+(function () {
+  var SPEED = 0.45;              // px per frame
+  var RESUME_AFTER = 3000;       // ms of quiet before drifting again
+  var lastTouched = 0, hovering = false, carry = 0;
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function rail() { return document.querySelector('.tt-members'); }
+
+  function step() {
+    var el = rail();
+    if (el && !hovering && Date.now() - lastTouched > RESUME_AFTER) {
+      var max = el.scrollWidth - el.clientWidth;
+      if (max > 4) {
+        carry += SPEED;
+        var whole = Math.floor(carry);
+        if (whole) {
+          carry -= whole;
+          el.scrollLeft = (el.scrollLeft >= max - 1) ? 0 : el.scrollLeft + whole;
+        }
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  function touched(e) { if (e.target.closest && e.target.closest('.tt-members')) lastTouched = Date.now(); }
+  ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (t) {
+    document.addEventListener(t, touched, { capture: true, passive: true });
+  });
+  document.addEventListener('mouseover', function (e) {
+    hovering = !!(e.target.closest && e.target.closest('.tt-members'));
+  }, true);
+})();
 </script>
 </body>
 </html>
